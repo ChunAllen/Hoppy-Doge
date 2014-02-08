@@ -1,7 +1,8 @@
 $(function(){
     //Parameters
     var images = {},
-        imageArray = ["leftArm", "legs", "torso", "rightArm", "head", "hair"];
+        imageArray = ["leftArm", "legs", "torso", "rightArm", "legs-jump",
+                      "head", "hair", "leftArm-jump", "rightArm-jump"];
 
     var totalResources = 6,
         numResourcesLoaded = 0,
@@ -37,6 +38,8 @@ $(function(){
         blinkUpdateTime = 200,
         blinkTimer = setInterval(updateBlink, blinkUpdateTime);
 
+    var jumping = false;
+
     _.each(imageArray, function(name){
         loadImage(name);
     });
@@ -50,18 +53,46 @@ $(function(){
     }
 
     function drawDoge(x,y){
-        context.width = context.width;
-        context.drawImage(images["leftArm"], x + 40, y - 42 - breathAmt);
-        context.drawImage(images["legs"], x, y);
+        jumpHeight = 45;
+
+
+        //refactor all this shit jumping
+        //Shadow
+        if (jumping) {
+            drawEllipse(x + 40, y + 29, 100 - breathAmt, 4);
+        } else {
+            drawEllipse(x + 40, y + 29, 160 - breathAmt, 6);
+        }
+
+        if (jumping) {
+            context.drawImage(images["leftArm-jump"], x + 40, y - 42 - breathAmt);
+        } else {
+            context.drawImage(images["leftArm"], x + 40, y - 42 - breathAmt);
+        }
+
+        if (jumping) {
+            context.drawImage(images["legs-jump"], x-6, y);
+        } else {
+            context.drawImage(images["legs"], x, y);
+        }
+
         context.drawImage(images["torso"], x, y - 50);
-        context.drawImage(images["rightArm"], x - 15, y - 42 - breathAmt);
+
+        if (jumping) {
+            context.drawImage(images["rightArm"], x - 35, y - 42 - breathAmt);
+        } else {
+            context.drawImage(images["rightArm"], x - 15, y - 42 - breathAmt);
+        }
         context.drawImage(images["head"], x - 10, y - 125 - breathAmt);
         context.drawImage(images["hair"], x - 37, y - 138 - breathAmt);
 
         drawEllipse(x + 47, y - 68 - breathAmt, 8, curEyeHeight); // Left Eye
         drawEllipse(x + 58, y - 68 - breathAmt, 8, curEyeHeight); // Right Eye
 
-        drawEllipse(x + 40, y + 29, 160 - breathAmt, 6); // Shadow
+        if (jumping) {
+            y -= jumpHeight;
+        }
+
     }
 
 
@@ -95,8 +126,8 @@ $(function(){
     }
 
     function redraw(){
-        var x = charX,
-            y = charY;
+        var x = charX,y = charY;
+        context.clearRect ( 0 , 0 , 800 , 600 );
         drawDoge(x,y);
         drawBall(myBall, context);
     }
@@ -156,6 +187,18 @@ $(function(){
         if(eyeOpenTime >= timeBtwBlinks) {
             blink();
         }
+    }
+
+    //Jumping
+    window.jump = function() {
+        if (!jumping) {
+            jumping = true;
+            setTimeout(land, 500);
+        }
+    }
+
+    function land() {
+        jumping = false;
     }
 
 
