@@ -10,7 +10,8 @@ $(function(){
     var charX = 300,
         charY = 300;
 
-    var context = document.getElementById('canvasId').getContext("2d");
+    var canvas = document.getElementById('canvasId');
+    var context = canvas.getContext("2d");
 
     var breathInc = 0.1,
         breathDir = 1,
@@ -29,7 +30,42 @@ $(function(){
         loadImage(name);
     });
 
+
+
+
     //Methods
+    function drawDoge(x,y){
+        context.width = context.width;
+        context.drawImage(images["leftArm"], x + 40, y - 42 - breathAmt);
+        context.drawImage(images["legs"], x, y);
+        context.drawImage(images["torso"], x, y - 50);
+        context.drawImage(images["rightArm"], x - 15, y - 42 - breathAmt);
+        context.drawImage(images["head"], x - 10, y - 125 - breathAmt);
+        context.drawImage(images["hair"], x - 37, y - 138 - breathAmt);
+
+        drawEllipse(x + 47, y - 68 - breathAmt, 8, curEyeHeight); // Left Eye
+        drawEllipse(x + 58, y - 68 - breathAmt, 8, curEyeHeight); // Right Eye
+
+        drawEllipse(x + 40, y + 29, 160 - breathAmt, 6); // Shadow
+    }
+
+    function drawBall() {
+      //positioning
+      var centerX = canvas.width / 2,
+          centerY = 10,
+          radius = 20;
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      context.fillStyle = 'green';
+      context.fill();
+      context.lineWidth = 5;
+      context.strokeStyle = '#003300';
+      context.stroke();
+    }
+
+
+
     function loadImage(name) {
         images[name] = new Image();
         images[name].onload = function() {
@@ -48,19 +84,8 @@ $(function(){
     function redraw(){
         var x = charX,
             y = charY;
-
-        context.width = context.width;
-        context.drawImage(images["leftArm"], x + 40, y - 42 - breathAmt);
-        context.drawImage(images["legs"], x, y);
-        context.drawImage(images["torso"], x, y - 50);
-        context.drawImage(images["rightArm"], x - 15, y - 42 - breathAmt);
-        context.drawImage(images["head"], x - 10, y - 125 - breathAmt);
-        context.drawImage(images["hair"], x - 37, y - 138 - breathAmt);
-
-        drawEllipse(x + 47, y - 68 - breathAmt, 8, curEyeHeight); // Left Eye
-        drawEllipse(x + 58, y - 68 - breathAmt, 8, curEyeHeight); // Right Eye
-
-        drawEllipse(x + 40, y + 29, 160 - breathAmt, 6); // Shadow
+        drawDoge(x,y);
+        drawBall();
     }
 
     //Game Utils
@@ -99,6 +124,10 @@ $(function(){
         }
     }
 
+
+    //MOTIONS
+
+
     //Blinking eyes
     function blink() {
         curEyeHeight -= 1;
@@ -116,6 +145,7 @@ $(function(){
             blink();
         }
     }
+
 
 
 });
