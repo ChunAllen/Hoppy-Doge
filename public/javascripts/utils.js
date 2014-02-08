@@ -176,10 +176,27 @@ $(function(){
             y = charY;
 
         context.clearRect ( 0 , 0 , 800 , 600 );
-        getDogeCoords(x,y); //get current doge coords
-        getBallCoords(ballStartingPosition, canvas.height/2); //get current ball coords
+        console.log(collide(x,y, ballStartingPosition));
         drawDoge(x,y);
         ballInterval = drawBall(myBall, context, ballStartingPosition -= ballStartingVelocity);
+    }
+
+    function collide(dogeX, dogeY, ballPosition){
+        var collision = false;
+
+        var currentDogeCoords = getDogeCoords(dogeX,dogeY),
+            currentBallCoords = getBallCoords(ballPosition, canvas.height/2);
+
+        var rangeOfDogeX = _.range(currentDogeCoords.backX, currentDogeCoords.frontX, 1),
+            rangeOfDogeY = _.range(currentDogeCoords.frontY, currentDogeCoords.frontY + 20);
+
+        if (_.contains(rangeOfDogeX, currentBallCoords.frontX) && _.contains(rangeOfDogeY, currentBallCoords.frontY ) ||
+            _.contains(rangeOfDogeX, currentBallCoords.topX) && _.contains(rangeOfDogeY, currentBallCoords.topY ) ||
+            _.contains(rangeOfDogeX, currentBallCoords.backX) && _.contains(rangeOfDogeY, currentBallCoords.backY )) {
+            collision = true;
+        }
+
+        return collision;
     }
 
 	function ballAppear(velocity){
