@@ -7,6 +7,17 @@ $(function(){
         numResourcesLoaded = 0,
         fps = 30;
 
+    var startTime = (new Date()).getTime();
+
+
+    var myBall = {
+        x: 0,
+        y: 75,
+        width: 10,
+        height: 10,
+        borderWidth: 5
+    };
+
     var charX = 300,
         charY = 300;
 
@@ -34,6 +45,10 @@ $(function(){
 
 
     //Methods
+    function clearCanvas(){
+        context.clearRect(0, 0, W, H);
+    }
+
     function drawDoge(x,y){
         context.width = context.width;
         context.drawImage(images["leftArm"], x + 40, y - 42 - breathAmt);
@@ -49,21 +64,19 @@ $(function(){
         drawEllipse(x + 40, y + 29, 160 - breathAmt, 6); // Shadow
     }
 
-    function drawBall() {
-      //positioning
-      var centerX = canvas.width / 2,
-          centerY = 10,
-          radius = 20;
 
-      context.beginPath();
-      context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-      context.fillStyle = 'green';
-      context.fill();
-      context.lineWidth = 5;
-      context.strokeStyle = '#003300';
-      context.stroke();
+    function drawBall(myBall, context) {
+        context.beginPath();
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+        var radius = 20;
+
+        context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        context.fillStyle = '#8ED6FF';
+        context.fill();
+        context.strokeStyle = 'black';
+        context.stroke();
     }
-
 
 
     function loadImage(name) {
@@ -85,7 +98,7 @@ $(function(){
         var x = charX,
             y = charY;
         drawDoge(x,y);
-        drawBall();
+        drawBall(myBall, context);
     }
 
     //Game Utils
@@ -126,8 +139,6 @@ $(function(){
 
 
     //MOTIONS
-
-
     //Blinking eyes
     function blink() {
         curEyeHeight -= 1;
@@ -138,6 +149,7 @@ $(function(){
             setTimeout(blink, 10);
         }
     }
+
     function updateBlink() {
         eyeOpenTime += blinkUpdateTime;
 
@@ -145,6 +157,10 @@ $(function(){
             blink();
         }
     }
+
+
+
+
 
 
 
