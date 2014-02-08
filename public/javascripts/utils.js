@@ -4,6 +4,8 @@ $(function(){
         imageArray = ["leftArm", "legs", "torso", "rightArm", "legs-jump",
                       "head", "hair", "leftArm-jump", "rightArm-jump"];
 
+    var dogeText = ["Much Wow!", "Go Doggy Jump!", "So Skilled!", "Nice Voice!"]
+
     var totalResources = 9,
         numResourcesLoaded = 0,
         fps = 30,
@@ -120,6 +122,13 @@ $(function(){
       context.fillText(score, 150, 100);
     }
 
+    function randomDogeText(text){
+
+      var randomText = Math.floor(Math.random()* text.length);
+      context.font = 'italic 40pt Calibri';
+      context.fillText(text[randomText], 300, 100);
+    }
+
 
     function loadImage(name) {
         images[name] = new Image();
@@ -141,13 +150,15 @@ $(function(){
         context.clearRect ( 0 , 0 , 800 , 600 );
         drawDoge(x,y)
         ballInterval = drawBall(context, ballStartingPosition -= ballStartingVelocity);
+        displayScore(dogeScore);
+
     }
 
 	function ballAppear(velocity){
        //increment score
        dogeScore += 1;
-       displayScore(dogeScore);
-	   ballStartingPosition =  900;
+       setInterval(randomDogeText(dogeText), 1000/ 10);
+       ballStartingPosition =  900;
        ballInterval = drawBall(context, ballStartingPosition -= velocity);
 	}
 
