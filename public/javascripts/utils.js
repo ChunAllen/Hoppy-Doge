@@ -3,9 +3,9 @@ $(function(){
     var images = {},
         imageArray = ["1blink", "1eyes", "2frontFoot-jump", "2frontFoot", "3frontFoot-jump",
                       "3frontFoot", "4head", "5body", "7backFoot-jump", "7backFoot",
-                      "8backFoot-jump", "8backFoot", "9tail"];
+                      "8backFoot-jump", "8backFoot", "9tail", "hit"];
 
-    var totalResources = 13,
+    var totalResources = 14,
         numResourcesLoaded = 0,
         fps = 30,
 		ballStartingPosition = 900,
@@ -57,6 +57,11 @@ $(function(){
     //Methods
     function clearCanvas(){
         context.clearRect(0, 0, W, H);
+    }
+
+    function drawHitDoge(x,y) {
+        drawEllipse(x + 10, y + 75, 300 - breathAmt, 10);
+        context.drawImage(images["hit"], x - 130, y - 150);
     }
 
     function drawDoge(x,y){
@@ -176,8 +181,14 @@ $(function(){
             y = charY;
 
         context.clearRect ( 0 , 0 , 800 , 600 );
-        console.log(collide(x,y, ballStartingPosition));
-        drawDoge(x,y);
+
+        //maybe move this to another function
+        if(collide(x,y, ballStartingPosition)) {
+            drawHitDoge(x,y);
+        } else {
+            drawDoge(x,y);
+        }
+
         ballInterval = drawBall(myBall, context, ballStartingPosition -= ballStartingVelocity);
     }
 
