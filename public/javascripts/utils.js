@@ -14,7 +14,10 @@ $(function(){
         charX = 300,
         charY = 300,
 		ballX,
-        dogeScore = 0;
+        dogeScore = 0
+        ball =  "0",
+        bird = "1";
+
 
 	var velocityItems =  [10, 15, 20, 25, 30];
 
@@ -43,6 +46,12 @@ $(function(){
 
 
     //Methods
+    function randomBall(){
+     var r = Math.random();
+     // 50/50 chance to return a bird
+     return r < 0.5 ? ball.charAt(Math.floor(r*ball.length*2)) : bird.charAt(Math.floor((r-0.5)*bird.length*2));
+    }
+
     function clearCanvas(){
         context.clearRect(0, 0, W, H);
     }
@@ -94,7 +103,7 @@ $(function(){
 
     function drawBall(context, xAxis) {
 		if (xAxis > 0){
-            ballImage(1, xAxis ,canvas.height / 2)
+            ballImage(0, xAxis, canvas.height / 2);
 		}else{
 			// if ball detected the border left canvas
 			clearInterval(ballInterval);
@@ -103,6 +112,12 @@ $(function(){
             // ball re-entry
             ballAppear(ballStartingVelocity);
 		}
+    }
+
+
+    function displayScore(score){
+      context.font = 'italic 40pt Calibri';
+      context.fillText(score, 150, 100);
     }
 
 
@@ -131,6 +146,7 @@ $(function(){
 	function ballAppear(velocity){
        //increment score
        dogeScore += 1;
+       displayScore(dogeScore);
 	   ballStartingPosition =  900;
        ballInterval = drawBall(context, ballStartingPosition -= velocity);
 	}
@@ -210,6 +226,7 @@ $(function(){
       context.drawImage(imageObj, ballX, ballY);
       imageObj.src = "/images/" + fileNum + ".png";
     }
+
 
 });
 
