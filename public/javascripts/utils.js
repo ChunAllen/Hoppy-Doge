@@ -6,9 +6,10 @@ $(function(){
 
     var totalResources = 9,
         numResourcesLoaded = 0,
-        fps = 30;
+        fps = 30,
 		ballStartingPosition = 900,
-		ballStartingVelocity = 10;
+		ballStartingVelocity = 10,
+		ballInterval;
 
 	var velocityItems =  Array(10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 95, 100);
 
@@ -22,7 +23,6 @@ $(function(){
         height: 10,
         borderWidth: 5
     };
-
 
 
     var charX = 300,
@@ -50,7 +50,6 @@ $(function(){
     _.each(imageArray, function(name){
         loadImage(name);
     });
-
 
 
 
@@ -106,21 +105,21 @@ $(function(){
 
     function drawBall(myBall, context, xAxis) {
 		if (xAxis > 0){
-			console.log(xAxis);
 			context.beginPath();
 			ballX = xAxis;
 			var centerY = canvas.height / 2;
 			var radius = 20;
-
 			context.arc(ballX, centerY, radius, 0, 2 * Math.PI, false);
 			context.fillStyle = '#8ED6FF';
 			context.fill();
 			context.strokeStyle = 'black';
 			context.stroke();
 		}else{
+			// if ball detected the border left canvas
 			// increment score here
 			clearInterval(ballInterval);
 			ballStartingVelocity = velocityItems[Math.floor(Math.random() * velocityItems.length)];
+			ballAppear(ballStartingVelocity);
 		}
     }
 
@@ -142,9 +141,14 @@ $(function(){
     function redraw(){
         var x = charX,y = charY;
         context.clearRect ( 0 , 0 , 800 , 600 );
-        drawDoge(x,y);
-        drawBall(myBall, context, ballStartingPosition -= ballStartingVelocity);
+        drawDoge(x,y)
+        ballInterval = drawBall(myBall, context, ballStartingPosition -= ballStartingVelocity);
     }
+
+	function ballAppear(velocity){
+	   ballStartingPosition =  900;
+       ballInterval = drawBall(myBall, context, ballStartingPosition -= velocity);
+	}
 
     //Game Utils
     function drawEllipse(centerX, centerY, width, height) {
