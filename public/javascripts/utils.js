@@ -73,15 +73,15 @@ $(function(){
             context.drawImage(images["legs-jump"], x - 1, y - 10);
             context.drawImage(images["rightArm-jump"], x - 35, y - 42 - breathAmt);
         } else {
-            drawEllipse(x + 40, y + 80, 160 - breathAmt, 6);
+            drawEllipse(x + 10, y + 75, 300 - breathAmt, 10);
         }
         context.drawImage(images["9tail"], x - 130, y - 75 - breathAmt);
 
         if (jumping) {
 
         } else {
-            context.drawImage(images["8backFoot"], x + 50, y + 5 - breathAmt);
-            context.drawImage(images["7backFoot"], x - 40, y - 10- breathAmt);
+            context.drawImage(images["8backFoot"], x + 50, y + 5);
+            context.drawImage(images["7backFoot"], x - 40, y - 10);
 
         }
 
@@ -91,8 +91,8 @@ $(function(){
         if (jumping) {
 
         } else {
-            context.drawImage(images["3frontFoot"], x - 81, y - 10 - breathAmt);
-            context.drawImage(images["2frontFoot"], x - 8, y + 20 - breathAmt);
+            context.drawImage(images["3frontFoot"], x - 81, y - 10);
+            context.drawImage(images["2frontFoot"], x - 8, y + 20);
         }
         context.drawImage(images["1eyes"], x + 50, y - 94 - breathAmt); // Left Eye
         //context.drawImage(images["hair"], x - 37, y - 138 - breathAmt);
