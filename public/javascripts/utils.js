@@ -94,11 +94,12 @@ $(function(){
             context.drawImage(images["3frontFoot"], x - 81, y - 10);
             context.drawImage(images["2frontFoot"], x - 8, y + 20);
         }
-        context.drawImage(images["1eyes"], x + 50, y - 94 - breathAmt); // Left Eye
-        //context.drawImage(images["hair"], x - 37, y - 138 - breathAmt);
-        //drawEllipse(x + 47, y - 68 - breathAmt, 8, curEyeHeight); // Left Eye
-        //drawEllipse(x + 58, y - 68 - breathAmt, 8, curEyeHeight); // Right Eye
 
+        if (curEyeHeight === 14) {
+            context.drawImage(images["1eyes"], x + 50, y - 94 - breathAmt); // Left Eye
+        } else {
+            context.drawImage(images["1blink"], x + 50, y - 94 - breathAmt); // Left Eye
+        }
     }
 
 
