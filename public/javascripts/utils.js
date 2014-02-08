@@ -14,7 +14,7 @@ $(function(){
 		ballInterval,
         imageObj = new Image(),
         charX = 300,
-        charY = 300,
+        charY = 270,
 		ballX,
         dogeScore = 0
         ball =  "0",
@@ -198,6 +198,7 @@ $(function(){
 
         //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
+            context.clearRect ( 0 , 0 , 800 , 600 );
             drawHitDoge(x,y);
         } else {
             drawDoge(x,y);
