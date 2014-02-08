@@ -1,6 +1,7 @@
 {
   "name": "wow",
   "version": "0.0.1",
+  "homepage": "https://github.com/staticshowdown/ss14-team-157",
   "authors": [
     "Ace Dimasuhid <ace.dimasuhid@gmail.com>"
   ],
@@ -11,7 +12,16 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "public/bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "underscore": "*",
+    "jquery": "*",
+    "backbone": "*",
+    "bootstrap" : "*",
+    "components-font-awesome" : "*"
+  }
+
 }
