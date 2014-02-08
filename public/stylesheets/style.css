@@ -143,3 +143,29 @@ a {
 span.galore {
   color: #F3D08A;
 }
+
+#game-over {
+  width: 500px;
+  height: 300px;
+  background: tan;
+  position: absolute;
+  top: 15%;
+  left: 20%;
+}
+
+.title.jumbo {
+  font-size: 4em;
+}
+
+.reset-game {
+  background: url('/images/try.png') no-repeat;
+  width: 220px;
+  height: 75px;
+  margin: 0 auto;
+  background-position: 0px 0px;
+}
+
+.reset-game:hover {
+  background-position: 0px -78px;
+  cursor: pointer;
+}
