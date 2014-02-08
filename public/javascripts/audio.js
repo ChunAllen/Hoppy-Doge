@@ -3,8 +3,7 @@ $(function(){
     var analyser,
         buf,
         currentPitch,
-        noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
-        doing = false;
+        noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
     function hasGetUserMedia() {
         return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -12,7 +11,7 @@ $(function(){
     }
 
     function gotStream(stream) {
-        var mediaStreamSource = audioContext.createdMediaStreamSource(stream);
+        var mediaStreamSource = audioContext.createMediaStreamSource(stream);
 
         analyser = audioContext.createAnalyser();
         analyser.fftSize = 2048;
@@ -42,7 +41,7 @@ $(function(){
             var val = (buf[i] - 128)/128;
             rms += val*val;
         }
-        rms = Math.sqrt(rms/Size);
+        rms = Math.sqrt(rms/SIZE);
 
         for (var offset = MIN_SAMPLES; offset <= MAX_SAMPLES; offset++) {
             var correlation = 0;
@@ -77,9 +76,11 @@ $(function(){
         autoCorrelate(buf, audioContext.sampleRate);
 
         var note = noteFromPitch(currentPitch);
+        var kewlNote = noteStrings[note%12];
         if (typeof(kewlNote) !== "undefined") {
-            if(!doing && kewlNote === "C#") {
-                //do Something
+            if(kewlNote === "C") {
+                //refactor to remove window
+                blink();
             }
         }
     }
