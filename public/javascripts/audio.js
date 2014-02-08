@@ -62,6 +62,29 @@ $(function(){
         }
     }
 
+    function noteFromPitch( frequency ) {
+        var noteNum = 12 * (Math.log( frequency / 440 )/Math.log(2) );
+        return Math.round( noteNum ) + 69;
+    }
+
+    function updatePitch(){
+        if (!window.requestAnimationFrame) {
+            window.requestAnimationFrame = window.webkitRequestAnimationFrame;
+        }
+
+        rafID = window.requestAnimationFrame( updatePitch );
+        analyser.getByteTimeDomainData( buf );
+        autoCorrelate(buf, audioContext.sampleRate);
+
+        var note = noteFromPitch(currentPitch);
+        if (typeof(kewlNote) !== "undefined") {
+            if(!doing && kewlNote === "C#") {
+                //do Something
+            }
+        }
+    }
+
+    //main audio runner
     if (hasGetUserMedia()) {
         //do some stuff here
         navigator.getMedia = ( navigator.getUserMedia ||
@@ -74,6 +97,7 @@ $(function(){
 
         var audioContext = new AudioContext();
 
+        navigator.getMedia({audio: true}, gotStream);
     } else {
       alert('getUserMedia() is not supported in your browser');
     }
