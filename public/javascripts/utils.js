@@ -97,6 +97,44 @@ $(function(){
         }
     }
 
+    function getDogeCoords(x,y) {
+        var dogeBox = {
+            frontX: 0,
+            frontY: 0,
+            backX: 0,
+            backY: 0,
+            width: 0,
+        }
+
+        if (jumping) {
+            dogeBox.frontX = x + 70;
+            dogeBox.frontY = y;
+            dogeBox.backX = x - 121;
+            dogeBox.backY = y;
+        } else {
+            dogeBox.frontX = x + 60;
+            dogeBox.frontY = y + 20;
+            dogeBox.backX = x - 91;
+            dogeBox.backY = y + 20;
+        }
+
+        dogeBox.width = dogeBox.frontX - dogeBox.backX;
+
+        return dogeBox;
+    }
+
+    function getBallCoords(x, y) {
+        var ballBox = {
+            frontX: x - 20,
+            frontY: y,
+            topX: x,
+            topY: y + 20,
+            backX: x + 20,
+            backY: y
+        }
+
+        return ballBox;
+    }
 
     function drawBall(myBall, context, xAxis) {
 		if (xAxis > 0){
@@ -134,9 +172,13 @@ $(function(){
         }
     }
     function redraw(){
-        var x = charX,y = charY;
+        var x = charX,
+            y = charY;
+
         context.clearRect ( 0 , 0 , 800 , 600 );
-        drawDoge(x,y)
+        getDogeCoords(x,y); //get current doge coords
+        getBallCoords(ballStartingPosition, canvas.height/2); //get current ball coords
+        drawDoge(x,y);
         ballInterval = drawBall(myBall, context, ballStartingPosition -= ballStartingVelocity);
     }
 
