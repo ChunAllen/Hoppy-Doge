@@ -15,8 +15,9 @@ $(function(){
 		ballInterval,
         imageObj = new Image(),
         charX = 300,
-        charY = 300,
+        charY = 270,
 		ballX,
+        ballY = 330,
         dogeScore = 0
         ball =  "0",
         bird = "1";
@@ -149,7 +150,7 @@ $(function(){
 
     function drawBall(context, xAxis) {
 		if (xAxis > 0){
-            ballImage(0, xAxis, canvas.height / 2);
+            ballImage(0, xAxis, ballY);
 		}else{
 			// if ball detected the border left canvas
 			clearInterval(ballInterval);
@@ -199,6 +200,7 @@ $(function(){
 
         //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
+            context.clearRect ( 0 , 0 , 800 , 600 );
             drawHitDoge(x,y);
         } else {
             drawDoge(x,y);
