@@ -4,7 +4,7 @@ $(function(){
         imageArray = ["leftArm", "legs", "torso", "rightArm", "legs-jump",
                       "head", "hair", "leftArm-jump", "rightArm-jump"];
 
-    var totalResources = 6,
+    var totalResources = 9,
         numResourcesLoaded = 0,
         fps = 30;
 
@@ -57,11 +57,16 @@ $(function(){
 
 
         //refactor all this shit jumping
+
         //Shadow
         if (jumping) {
             drawEllipse(x + 40, y + 29, 100 - breathAmt, 4);
         } else {
             drawEllipse(x + 40, y + 29, 160 - breathAmt, 6);
+        }
+
+        if (jumping) {
+            y -= jumpHeight;
         }
 
         if (jumping) {
@@ -71,7 +76,7 @@ $(function(){
         }
 
         if (jumping) {
-            context.drawImage(images["legs-jump"], x-6, y);
+            context.drawImage(images["legs-jump"], x - 1, y - 10);
         } else {
             context.drawImage(images["legs"], x, y);
         }
@@ -79,7 +84,7 @@ $(function(){
         context.drawImage(images["torso"], x, y - 50);
 
         if (jumping) {
-            context.drawImage(images["rightArm"], x - 35, y - 42 - breathAmt);
+            context.drawImage(images["rightArm-jump"], x - 35, y - 42 - breathAmt);
         } else {
             context.drawImage(images["rightArm"], x - 15, y - 42 - breathAmt);
         }
@@ -88,10 +93,6 @@ $(function(){
 
         drawEllipse(x + 47, y - 68 - breathAmt, 8, curEyeHeight); // Left Eye
         drawEllipse(x + 58, y - 68 - breathAmt, 8, curEyeHeight); // Right Eye
-
-        if (jumping) {
-            y -= jumpHeight;
-        }
 
     }
 
