@@ -100,14 +100,6 @@ $(function(){
     }
 
     //Blinking eyes
-    function updateBlink() {
-        eyeOpenTime += blinkUpdateTime;
-
-        if(eyeOpenTime >= timeBtwBlinks) {
-            blink();
-        }
-    }
-
     function blink() {
         curEyeHeight -= 1;
         if (curEyeHeight <= 0) {
@@ -117,6 +109,14 @@ $(function(){
             setTimeout(blink, 10);
         }
     }
+    function updateBlink() {
+        eyeOpenTime += blinkUpdateTime;
+
+        if(eyeOpenTime >= timeBtwBlinks) {
+            blink();
+        }
+    }
+
 
 });
 
