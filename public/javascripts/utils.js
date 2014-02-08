@@ -1,12 +1,12 @@
 $(function(){
     //Parameters
     var images = {},
-        imageArray = ["leftArm", "legs", "torso", "rightArm", "legs-jump",
-                      "head", "hair", "leftArm-jump", "rightArm-jump"];
+        imageArray = ["1blink", "1eyes", "2frontFoot-jump", "2frontFoot", "3frontFoot-jump",
+                      "3frontFoot", "4head", "5body", "7backFoot-jump", "7backFoot",
+                      "8backFoot-jump", "8backFoot", "9tail", "hit", "hitjump"];
 
     var dogeText = ["Much Wow!", "Go Doggy Jump!", "So Skilled!", "Nice Voice!"]
-
-    var totalResources = 9,
+    var totalResources = 15,
         numResourcesLoaded = 0,
         fps = 30,
 		ballStartingPosition = 900,
@@ -58,50 +58,93 @@ $(function(){
         context.clearRect(0, 0, W, H);
     }
 
+    function drawHitDoge(x,y) {
+        if (jumping) {
+            drawEllipse(x + 10, y + 75, 200 - breathAmt, 4);
+            y -= jumpHeight;
+            context.drawImage(images["hitjump"], x - 130, y - 150);
+        } else {
+            drawEllipse(x + 10, y + 75, 300 - breathAmt, 10);
+            context.drawImage(images["hit"], x - 130, y - 150);
+        }
+    }
+
     function drawDoge(x,y){
         jumpHeight = 45;
 
-
-        //refactor all this shit jumping
-
-        //Shadow
         if (jumping) {
-            drawEllipse(x + 40, y + 29, 100 - breathAmt, 4);
-        } else {
-            drawEllipse(x + 40, y + 29, 160 - breathAmt, 6);
-        }
-
-        if (jumping) {
+            drawEllipse(x + 10, y + 75, 200 - breathAmt, 4);
             y -= jumpHeight;
+        } else {
+            drawEllipse(x + 10, y + 75, 300 - breathAmt, 10);
         }
+        context.drawImage(images["9tail"], x - 130, y - 75 - breathAmt);
 
         if (jumping) {
-            context.drawImage(images["leftArm-jump"], x + 40, y - 42 - breathAmt);
+            context.drawImage(images["8backFoot-jump"], x + 45, y + 12);
+            context.drawImage(images["7backFoot-jump"], x - 55, y - 10);
         } else {
-            context.drawImage(images["leftArm"], x + 40, y - 42 - breathAmt);
+            context.drawImage(images["8backFoot"], x + 50, y + 5);
+            context.drawImage(images["7backFoot"], x - 40, y - 10);
+
         }
+
+        context.drawImage(images["5body"], x - 81, y - 74);
+        context.drawImage(images["4head"], x - 10, y - 145 - breathAmt);
 
         if (jumping) {
-            context.drawImage(images["legs-jump"], x - 1, y - 10);
+            context.drawImage(images["3frontFoot-jump"], x - 111, y - 10);
+            context.drawImage(images["2frontFoot-jump"], x - 8, y + 20);
         } else {
-            context.drawImage(images["legs"], x, y);
+            context.drawImage(images["3frontFoot"], x - 81, y - 10);
+            context.drawImage(images["2frontFoot"], x - 8, y + 20);
         }
 
-        context.drawImage(images["torso"], x, y - 50);
-
-        if (jumping) {
-            context.drawImage(images["rightArm-jump"], x - 35, y - 42 - breathAmt);
+        if (curEyeHeight === 14) {
+            context.drawImage(images["1eyes"], x + 50, y - 94 - breathAmt); // Left Eye
         } else {
-            context.drawImage(images["rightArm"], x - 15, y - 42 - breathAmt);
+            context.drawImage(images["1blink"], x + 50, y - 94 - breathAmt); // Left Eye
         }
-        context.drawImage(images["head"], x - 10, y - 125 - breathAmt);
-        context.drawImage(images["hair"], x - 37, y - 138 - breathAmt);
-
-        drawEllipse(x + 47, y - 68 - breathAmt, 8, curEyeHeight); // Left Eye
-        drawEllipse(x + 58, y - 68 - breathAmt, 8, curEyeHeight); // Right Eye
-
     }
 
+    function getDogeCoords(x,y) {
+        var dogeBox = {
+            frontX: 0,
+            frontY: 0,
+            backX: 0,
+            backY: 0,
+            width: 0,
+        }
+
+        if (jumping) {
+            dogeBox.frontX = x + 70;
+            dogeBox.frontY = y;
+            dogeBox.backX = x - 121;
+            dogeBox.backY = y;
+        } else {
+            dogeBox.frontX = x + 60;
+            dogeBox.frontY = y + 20;
+            dogeBox.backX = x - 91;
+            dogeBox.backY = y + 20;
+        }
+
+        dogeBox.width = dogeBox.frontX - dogeBox.backX;
+
+        return dogeBox;
+    }
+
+    function getBallCoords(x, y) {
+        var ballBox = {
+            frontX: x - 20,
+            frontY: y,
+            topX: x,
+            topY: y + 20,
+            backX: x + 20,
+            backY: y
+        }
+
+        return ballBox;
+    }
 
     function drawBall(context, xAxis) {
 		if (xAxis > 0){
@@ -146,12 +189,40 @@ $(function(){
     }
 
     function redraw(){
-        var x = charX,y = charY;
+        var x = charX,
+            y = charY;
+
         context.clearRect ( 0 , 0 , 800 , 600 );
         drawDoge(x,y)
-        ballInterval = drawBall(context, ballStartingPosition -= ballStartingVelocity);
-        displayScore(dogeScore);
 
+
+        //maybe move this to another function
+        if(collide(x,y, ballStartingPosition)) {
+            drawHitDoge(x,y);
+        } else {
+            drawDoge(x,y);
+            displayScore(dogeScore);
+        }
+
+        ballInterval = drawBall(context, ballStartingPosition -= ballStartingVelocity);
+    }
+
+    function collide(dogeX, dogeY, ballPosition){
+        var collision = false;
+
+        var currentDogeCoords = getDogeCoords(dogeX,dogeY),
+            currentBallCoords = getBallCoords(ballPosition, canvas.height/2);
+
+        var rangeOfDogeX = _.range(currentDogeCoords.backX, currentDogeCoords.frontX, 1),
+            rangeOfDogeY = _.range(currentDogeCoords.frontY, currentDogeCoords.frontY + 20);
+
+        if (_.contains(rangeOfDogeX, currentBallCoords.frontX) && _.contains(rangeOfDogeY, currentBallCoords.frontY ) ||
+            _.contains(rangeOfDogeX, currentBallCoords.topX) && _.contains(rangeOfDogeY, currentBallCoords.topY ) ||
+            _.contains(rangeOfDogeX, currentBallCoords.backX) && _.contains(rangeOfDogeY, currentBallCoords.backY )) {
+            collision = true;
+        }
+
+        return collision;
     }
 
 	function ballAppear(velocity){
