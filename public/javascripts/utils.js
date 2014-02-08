@@ -3,9 +3,9 @@ $(function(){
     var images = {},
         imageArray = ["1blink", "1eyes", "2frontFoot-jump", "2frontFoot", "3frontFoot-jump",
                       "3frontFoot", "4head", "5body", "7backFoot-jump", "7backFoot",
-                      "8backFoot-jump", "8backFoot", "9tail", "hit"];
+                      "8backFoot-jump", "8backFoot", "9tail", "hit", "hitjump"];
 
-    var totalResources = 14,
+    var totalResources = 15,
         numResourcesLoaded = 0,
         fps = 30,
 		ballStartingPosition = 900,
@@ -60,8 +60,14 @@ $(function(){
     }
 
     function drawHitDoge(x,y) {
-        drawEllipse(x + 10, y + 75, 300 - breathAmt, 10);
-        context.drawImage(images["hit"], x - 130, y - 150);
+        if (jumping) {
+            drawEllipse(x + 10, y + 75, 200 - breathAmt, 4);
+            y -= jumpHeight;
+            context.drawImage(images["hitjump"], x - 130, y - 150);
+        } else {
+            drawEllipse(x + 10, y + 75, 300 - breathAmt, 10);
+            context.drawImage(images["hit"], x - 130, y - 150);
+        }
     }
 
     function drawDoge(x,y){
