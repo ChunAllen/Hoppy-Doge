@@ -1,0 +1,17 @@
+{
+  "name": "wow",
+  "version": "0.0.1",
+  "authors": [
+    "Ace Dimasuhid <ace.dimasuhid@gmail.com>"
+  ],
+  "main": "server.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
