@@ -8,13 +8,15 @@ $(function(){
         numResourcesLoaded = 0,
         fps = 30,
 		ballStartingPosition = 900,
-		ballStartingVelocity = 10,
-		ballInterval;
+		ballStartingVelocity = 5,
+		ballInterval,
+        imageObj = new Image(),
+        charX = 300,
+        charY = 300,
+		ballX,
+        dogeScore = 0;
 
-	var velocityItems =  Array(10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 95, 100);
-
-    var startTime = (new Date()).getTime();
-
+	var velocityItems =  [10, 15, 20, 25, 30];
 
     var myBall = {
         x: 0,
@@ -24,10 +26,6 @@ $(function(){
         borderWidth: 5
     };
 
-
-    var charX = 300,
-        charY = 300,
-		ballX;
 
     var canvas = document.getElementById('canvasId');
     var context = canvas.getContext("2d");
@@ -116,10 +114,11 @@ $(function(){
 			context.stroke();
 		}else{
 			// if ball detected the border left canvas
-			// increment score here
 			clearInterval(ballInterval);
-			ballStartingVelocity = velocityItems[Math.floor(Math.random() * velocityItems.length)];
-			ballAppear(ballStartingVelocity);
+            // set random velocity
+            ballStartingVelocity = velocityItems[Math.floor(Math.random() * velocityItems.length)];
+            // ball re-entry
+            ballAppear(ballStartingVelocity);
 		}
     }
 
@@ -146,6 +145,8 @@ $(function(){
     }
 
 	function ballAppear(velocity){
+       //increment score
+       dogeScore += 1;
 	   ballStartingPosition =  900;
        ballInterval = drawBall(myBall, context, ballStartingPosition -= velocity);
 	}
