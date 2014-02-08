@@ -1,7 +1,6 @@
-# Doge Style
-(tempo app name)
+# HoppyDoge
 
-Doge Style is a voice controlled HTML5 browser game! Such wow! Very much amaze.
+HoppyDoge is a voice controlled HTML5 browser game! Such wow! Very much amaze.
 
 ## How it works
 

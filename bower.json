@@ -1,9 +1,10 @@
 {
-  "name": "wow",
+  "name": "HoppyDoge",
   "version": "0.0.1",
   "homepage": "https://github.com/staticshowdown/ss14-team-157",
   "authors": [
-    "Ace Dimasuhid <ace.dimasuhid@gmail.com>"
+    "Ace Dimasuhid <ace.dimasuhid@gmail.com>",
+    "Robbie Marcelo <rbmrclo@hotmail.com>"
   ],
   "main": "server.js",
   "license": "MIT",
