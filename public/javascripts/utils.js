@@ -148,7 +148,9 @@ $(function(){
 
     function drawBall(context, xAxis) {
 		if (xAxis > 0){
-            ballImage(0, xAxis, canvas.height / 2);
+            y = canvas.height / 2;
+            drawEllipse(xAxis + 22, y + 45, 70, 6);
+            ballImage(0, xAxis, y);
 		}else{
 			// if ball detected the border left canvas
 			clearInterval(ballInterval);
@@ -296,7 +298,8 @@ $(function(){
     window.jump = function() {
         if (!jumping) {
             jumping = true;
-            setTimeout(land, 800);
+            window.clearInterval(window.currentTimeout)
+            window.currentTimeout = setTimeout(land, 600);
         }
     }
 
