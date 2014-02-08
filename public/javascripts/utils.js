@@ -5,30 +5,23 @@ $(function(){
                       "3frontFoot", "4head", "5body", "7backFoot-jump", "7backFoot",
                       "8backFoot-jump", "8backFoot", "9tail", "hit", "hitjump"];
 
+    var dogeText = ["Much Wow!", "Go Doggy Jump!", "So Skilled!", "Nice Voice!"]
     var totalResources = 15,
         numResourcesLoaded = 0,
         fps = 30,
 		ballStartingPosition = 900,
-		ballStartingVelocity = 10,
-		ballInterval;
-
-	var velocityItems =  Array(10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 95, 100);
-
-    var startTime = (new Date()).getTime();
-
-
-    var myBall = {
-        x: 0,
-        y: 75,
-        width: 10,
-        height: 10,
-        borderWidth: 5
-    };
-
-
-    var charX = 300,
+		ballStartingVelocity = 5,
+		ballInterval,
+        imageObj = new Image(),
+        charX = 300,
         charY = 300,
-		ballX;
+		ballX,
+        dogeScore = 0
+        ball =  "0",
+        bird = "1";
+
+
+	var velocityItems =  [10, 15, 20, 25, 30];
 
     var canvas = document.getElementById('canvasId');
     var context = canvas.getContext("2d");
@@ -55,6 +48,12 @@ $(function(){
 
 
     //Methods
+    function randomBall(){
+     var r = Math.random();
+     // 50/50 chance to return a bird
+     return r < 0.5 ? ball.charAt(Math.floor(r*ball.length*2)) : bird.charAt(Math.floor((r-0.5)*bird.length*2));
+    }
+
     function clearCanvas(){
         context.clearRect(0, 0, W, H);
     }
@@ -147,24 +146,30 @@ $(function(){
         return ballBox;
     }
 
-    function drawBall(myBall, context, xAxis) {
+    function drawBall(context, xAxis) {
 		if (xAxis > 0){
-			context.beginPath();
-			ballX = xAxis;
-			var centerY = canvas.height / 2;
-			var radius = 20;
-			context.arc(ballX, centerY, radius, 0, 2 * Math.PI, false);
-			context.fillStyle = '#8ED6FF';
-			context.fill();
-			context.strokeStyle = 'black';
-			context.stroke();
+            ballImage(0, xAxis, canvas.height / 2);
 		}else{
 			// if ball detected the border left canvas
-			// increment score here
 			clearInterval(ballInterval);
-			ballStartingVelocity = velocityItems[Math.floor(Math.random() * velocityItems.length)];
-			ballAppear(ballStartingVelocity);
+            // set random velocity
+            ballStartingVelocity = velocityItems[Math.floor(Math.random() * velocityItems.length)];
+            // ball re-entry
+            ballAppear(ballStartingVelocity);
 		}
+    }
+
+
+    function displayScore(score){
+      context.font = 'italic 40pt Calibri';
+      context.fillText(score, 150, 100);
+    }
+
+    function randomDogeText(text){
+
+      var randomText = Math.floor(Math.random()* text.length);
+      context.font = 'italic 40pt Calibri';
+      context.fillText(text[randomText], 300, 100);
     }
 
 
@@ -182,20 +187,24 @@ $(function(){
             setInterval(redraw, 1000 / fps);
         }
     }
+
     function redraw(){
         var x = charX,
             y = charY;
 
         context.clearRect ( 0 , 0 , 800 , 600 );
+        drawDoge(x,y)
+
 
         //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
             drawHitDoge(x,y);
         } else {
             drawDoge(x,y);
+            displayScore(dogeScore);
         }
 
-        ballInterval = drawBall(myBall, context, ballStartingPosition -= ballStartingVelocity);
+        ballInterval = drawBall(context, ballStartingPosition -= ballStartingVelocity);
     }
 
     function collide(dogeX, dogeY, ballPosition){
@@ -217,8 +226,11 @@ $(function(){
     }
 
 	function ballAppear(velocity){
-	   ballStartingPosition =  900;
-       ballInterval = drawBall(myBall, context, ballStartingPosition -= velocity);
+       //increment score
+       dogeScore += 1;
+       setInterval(randomDogeText(dogeText), 1000/ 10);
+       ballStartingPosition =  900;
+       ballInterval = drawBall(context, ballStartingPosition -= velocity);
 	}
 
     //Game Utils
@@ -243,6 +255,10 @@ $(function(){
       context.closePath();
     }
 
+
+
+    //MOTIONS
+    //Blinking eyes
     function updateBreath() {
         if (breathDir === 1) {
             breathAmt -= breathInc;
@@ -257,9 +273,6 @@ $(function(){
         }
     }
 
-
-    //MOTIONS
-    //Blinking eyes
     function blink() {
         curEyeHeight -= 1;
         if (curEyeHeight <= 0) {
@@ -290,30 +303,11 @@ $(function(){
         jumping = false;
     }
 
-
-	//function animate(myBall, canvas, context, startTime) {
-        //// update
-		//console.log('allen');
-        //var time = (new Date()).getTime() - startTime;
-
-        //var linearSpeed = 100;
-        //// pixels / second
-        //var newX = linearSpeed * time / 1000;
-
-        //if(newX < canvas.width - myBall.width - myBall.borderWidth / 2) {
-          //myBall.x = newX;
-        //}
-
-        //context.clearRect(0, 0, canvas.width, canvas.height);
-        //drawBall(myBall, context);
-    //}
-
-	//var ballInterval = setInterval(animate(myBall, canvas, context, startTime), 1000 / fps);
-
-
-
-
-
+    // ball Image
+    function ballImage(fileNum, ballX ,ballY){
+      context.drawImage(imageObj, ballX, ballY);
+      imageObj.src = "/images/" + fileNum + ".png";
+    }
 
 
 });
