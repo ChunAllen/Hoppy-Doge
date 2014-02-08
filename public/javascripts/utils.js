@@ -6,7 +6,7 @@ $(function(){
                       "3frontFoot", "4head", "5body", "7backFoot-jump", "7backFoot",
                       "8backFoot-jump", "8backFoot", "9tail", "hit", "hitjump"];
 
-    var dogeText = ["Much Wow!", "Go Doggy Jump!", "So Skilled!", "Nice Voice!"]
+    var dogeText = ["Much Wow!", "Go Doggy Jump!", "So Skilled!", "Nice Voice!", "Amaze Jump!"]
     var totalResources = 15,
         numResourcesLoaded = 0,
         fps = 30,

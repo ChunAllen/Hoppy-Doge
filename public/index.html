@@ -29,28 +29,28 @@
   </head>
   <body>
     <!-- Turn this to a template -->
-    <div class="fixed-container">
+    <div class="fixed-container" id="site-background">
       <div id="landing">
         <div class="logo"></div>
         <div class="vspacer-10"></div>
         <h1 class="title"> HOPPY DOGE </h1>
         <p class="sub-title"> A such amaze voice controlled browser game that is not so 2010.
-          <br/> Avoid the balls by saying "wow" and make doge happy.
+          <br/> Avoid the balls by saying "wow" and make doge happy. </p>
+        <div id="team">
+          <h1> Crafted with such love by <span class='galore'>@nachosgalore</span> </h1>
+        </div>
         <div class="vspacer-110"></div>
         <div class="start-button red" id="startGame"></div>
       </div>
 
       <div id="game">
-        <div class="box-container-header">
+        <div class="arcade">
+          <div class="box-container">
+            <canvas id="canvasId" width="800" height="600"></canvas>
+          </div>
         </div>
-
-        <div class="box-container">
-        </div>
-        <!-- <div class="arcade"> -->
-        <!-- </div> -->
       </div>
 
-      <canvas id="canvasId" width="800" height="600"></canvas>
       <!-- </div> -->
     </div>
   </body>
