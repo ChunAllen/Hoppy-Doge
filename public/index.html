@@ -23,11 +23,35 @@
     <script src="javascripts/audio.js"></script>
     <script src="javascripts/canvas.js"></script>
 
-    <!-- For final release: <script src="javascripts/application-compiled.js"></script> -->
+    <!-- Compiled site scripts -->
+    <script src="javascripts/application-compiled.js"></script>
 
   </head>
   <body>
-    <h1> Super Cool Wow Game </h1>
-    <canvas id="canvasId" width="800" height="600">
+    <!-- Turn this to a template -->
+    <div class="fixed-container">
+      <div id="landing">
+        <div class="logo"></div>
+        <div class="vspacer-10"></div>
+        <h1 class="title"> HOPPY DOGE </h1>
+        <p class="sub-title"> A such amaze voice controlled browser game that is not so 2010.
+          <br/> Avoid the balls by saying "wow" and make doge happy.
+        <div class="vspacer-110"></div>
+        <div class="start-button red" id="startGame"></div>
+      </div>
+
+      <div id="game">
+        <div class="box-container-header">
+        </div>
+
+        <div class="box-container">
+        </div>
+        <!-- <div class="arcade"> -->
+        <!-- </div> -->
+      </div>
+
+      <canvas id="canvasId" width="800" height="600"></canvas>
+      <!-- </div> -->
+    </div>
   </body>
 </html>

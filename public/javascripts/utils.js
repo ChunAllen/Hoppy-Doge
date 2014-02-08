@@ -1,4 +1,5 @@
 $(function(){
+
     //Parameters
     var images = {},
         imageArray = ["leftArm", "legs", "torso", "rightArm", "legs-jump",
@@ -203,6 +204,16 @@ $(function(){
         jumping = false;
     }
 
+  function createSpacers() {
+     var spacers = document.querySelectorAll("[class^='vspacer']");
+
+    for (var x = 0; x < spacers.length; x++ ){
+      var spacer_height = spacers[x].className.split('-')[1];
+      spacers[x].style.height = spacer_height + "px";
+    }
+  }
+
+  createSpacers();
 
 	//function animate(myBall, canvas, context, startTime) {
         //// update
@@ -222,12 +233,6 @@ $(function(){
     //}
 
 	//var ballInterval = setInterval(animate(myBall, canvas, context, startTime), 1000 / fps);
-
-
-
-
-
-
 
 });
 
