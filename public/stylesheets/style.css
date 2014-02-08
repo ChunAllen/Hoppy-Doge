@@ -1,5 +1,6 @@
 body {
   font-family: 'Comic Sans MS', 'Comic Sans' !important; /* Because comic sans */
+  overflow: hidden;
 }
 
 a {
@@ -168,4 +169,11 @@ span.galore {
 .reset-game:hover {
   background-position: 0px -78px;
   cursor: pointer;
+}
+
+#nyandoge {
+  background: url('/images/tacodoge.gif') no-repeat;  
+  margin-top: 20px;
+  height: 50px;
+  width: 130px;
 }

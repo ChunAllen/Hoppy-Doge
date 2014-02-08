@@ -24,7 +24,7 @@ $(document).ready(function() {
     $("#game").hide();
 
     $background.removeClass('gradient-bg');
-    $("#landing").show();
+    $("#landing").fadeIn(1000);
   });
 
 });
