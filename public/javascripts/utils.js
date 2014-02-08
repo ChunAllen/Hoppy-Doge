@@ -3,6 +3,9 @@ $(function(){
     var images = {},
         imageArray = ["leftArm", "legs", "torso", "rightArm", "legs-jump",
                       "head", "hair", "leftArm-jump", "rightArm-jump"];
+        //imageArray = ["1blink", "1eyes", "2frontFoot-jump", "2frontFoot", "3frontFoot-jump",
+                      //"3frontFoot", "4head", "5body", "7backFoot-jump", "7backFoot",
+                      //"8backFoot-jump", "8backFoot", "9tail"];
 
     var totalResources = 9,
         numResourcesLoaded = 0,
@@ -57,40 +60,21 @@ $(function(){
 
 
         //refactor all this shit jumping
-
-        //Shadow
         if (jumping) {
-            drawEllipse(x + 40, y + 29, 100 - breathAmt, 4);
-        } else {
-            drawEllipse(x + 40, y + 29, 160 - breathAmt, 6);
-        }
-
-        if (jumping) {
+            drawEllipse(x + 40, y + 29, 100 - breathAmt, 4); //Shadow
             y -= jumpHeight;
-        }
-
-        if (jumping) {
             context.drawImage(images["leftArm-jump"], x + 40, y - 42 - breathAmt);
-        } else {
-            context.drawImage(images["leftArm"], x + 40, y - 42 - breathAmt);
-        }
-
-        if (jumping) {
             context.drawImage(images["legs-jump"], x - 1, y - 10);
-        } else {
-            context.drawImage(images["legs"], x, y);
-        }
-
-        context.drawImage(images["torso"], x, y - 50);
-
-        if (jumping) {
             context.drawImage(images["rightArm-jump"], x - 35, y - 42 - breathAmt);
         } else {
+            drawEllipse(x + 40, y + 29, 160 - breathAmt, 6);
+            context.drawImage(images["leftArm"], x + 40, y - 42 - breathAmt);
+            context.drawImage(images["legs"], x, y);
             context.drawImage(images["rightArm"], x - 15, y - 42 - breathAmt);
         }
+        context.drawImage(images["torso"], x, y - 50);
         context.drawImage(images["head"], x - 10, y - 125 - breathAmt);
         context.drawImage(images["hair"], x - 37, y - 138 - breathAmt);
-
         drawEllipse(x + 47, y - 68 - breathAmt, 8, curEyeHeight); // Left Eye
         drawEllipse(x + 58, y - 68 - breathAmt, 8, curEyeHeight); // Right Eye
 
