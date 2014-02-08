@@ -78,9 +78,9 @@ $(function(){
         var note = noteFromPitch(currentPitch);
         var kewlNote = noteStrings[note%12];
         if (typeof(kewlNote) !== "undefined") {
-            if(kewlNote === "C") {
+            if(kewlNote === "C#") {
                 //refactor to remove window
-                blink();
+                jump();
             }
         }
     }
