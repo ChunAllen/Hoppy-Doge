@@ -367,8 +367,10 @@ $("#startGame").click(function(){
   function displayGameOver(finalScore){
 	  var divScore = "<h1 class='title'> Such Score!</h1><h1 class='title jumbo'>" +
           finalScore + "</h1><div class='vspacer-10'></div>"+
-          "<input type='text' id='leader' value='"+ userName +"'/>" +
-          "<div class='reset-game' id='resetGame'></div>";
+          "<center>" +
+          "<input type='text' id='leader' value='"+ userName +"' maxlength='10'/>" +
+          "<div class='reset-game' id='resetGame'></div>" +
+          "</center>";
 
 	  $('#game-over').html(divScore);
       $('#game-over').show();
