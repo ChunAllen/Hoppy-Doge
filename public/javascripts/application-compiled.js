@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	 // A lot of faking for the sake of UI flow
-     $background = $("#site-background");
+    $background = $("#site-background");
 	  $("#game").hide();
 
 	  $("#startGame").on('click', function() {
@@ -26,4 +26,14 @@ $(document).ready(function() {
       $("#landing").fadeIn(1000);
 	  });
 
+    createSpacers();
 });
+
+function createSpacers() {
+   var spacers = document.querySelectorAll("[class^='vspacer']");
+
+  for (var x = 0; x < spacers.length; x++ ){
+    var spacer_height = spacers[x].className.split('-')[1];
+    spacers[x].style.height = spacer_height + "px";
+  }
+}

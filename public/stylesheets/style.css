@@ -147,11 +147,16 @@ span.galore {
 
 #game-over {
   width: 500px;
-  height: 300px;
-  background: tan;
+  height: 250px;
+  background: #E84242;
   position: absolute;
   top: 15%;
-  left: 20%;
+  left: 19%;
+
+  border: 8px solid #DBB562;
+  border-radius: 4px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 .title.jumbo {
