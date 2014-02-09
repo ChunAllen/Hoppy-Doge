@@ -27,9 +27,9 @@ $(function(){
         var counter = 1;
         _.each(leaders, function(leader){
             $("#scoreboard tbody").append("<tr>" +
-                    "<td>"+ counter + "</td>" +
-                    "<td>"+ leader.name +"</td>" +
-                    "<td>"+ leader.score +"</td>" +
+                    "<td>"+ $('<span/>').text(counter.substring(0,10)).html() + "</td>" +
+                    "<td>"+ $('<span/>').text(leader.name).html() +"</td>" +
+                    "<td>"+ $('<span/>').text(leader.score).html() +"</td>" +
                 "</tr>"
             )
             counter++;
