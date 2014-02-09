@@ -5,7 +5,8 @@ $(function(){
                       "3frontFoot", "4head", "5body", "7backFoot-jump", "7backFoot",
                       "8backFoot-jump", "8backFoot", "9tail", "hit", "hitjump"];
 
-    var dogeText = ["Much Wow!", "Go Doggy Jump!", "So Skilled!", "Nice Voice!"]
+    var dogeText = ["Much Wow!", "Go Doggy Jump!", "So Skilled!", "Nice Voice!", "Amaze Jump!"]
+
     var totalResources = 15,
         numResourcesLoaded = 0,
         fps = 30,
@@ -149,7 +150,9 @@ $(function(){
 
     function drawBall(context, xAxis) {
 		if (xAxis > 0){
-            ballImage(0, xAxis, ballY);
+            y = 450 ;
+            drawEllipse(xAxis + 22, y + 45, 70, 6);
+            ballImage(0, xAxis, y);
 		}else{
 			// if ball detected the border left canvas
 			clearInterval(ballInterval);
@@ -162,15 +165,14 @@ $(function(){
 
 
     function displayScore(score){
-      context.font = 'italic 40pt Calibri';
-      context.fillText(score, 150, 100);
+      context.font = '40pt Calibri';
+      context.fillText(score, canvas.width / 2, 100);
     }
 
     function randomDogeText(text){
-
       var randomText = Math.floor(Math.random()* text.length);
-      context.font = 'italic 40pt Calibri';
-      context.fillText(text[randomText], 300, 100);
+      context.font = 'italic 30pt Calibri';
+      context.fillText(text[randomText], ( canvas.width / 2 ) + 100, 300);
     }
 
 
@@ -184,6 +186,7 @@ $(function(){
 
     function resourceLoaded(){
         numResourcesLoaded += 1;
+
         if(numResourcesLoaded === totalResources) {
             setInterval(redraw, 1000 / fps);
         }
@@ -191,7 +194,7 @@ $(function(){
 
     function redraw(){
         var x = charX,
-            y = charY;
+            y = 418;
 
         context.clearRect ( 0 , 0 , 800 , 600 );
         drawDoge(x,y)
