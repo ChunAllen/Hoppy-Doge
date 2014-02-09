@@ -148,6 +148,7 @@ $(function(){
     }
 
     function drawBall(context, xAxis) {
+
 		if (xAxis > 0){
             //y = canvas.height / 2;
             y = 450 ;
@@ -159,7 +160,7 @@ $(function(){
             // set random velocity
             ballStartingVelocity = velocityItems[Math.floor(Math.random() * velocityItems.length)];
             // ball re-entry
-            ballAppear(ballStartingVelocity);
+            ballAppear(ballStartingVelocity, "continue");
 		}
     }
 
@@ -201,6 +202,8 @@ $(function(){
 
         //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
+			// if ball was touched doge
+			ballAppear(0, "GG");
             context.clearRect ( 0 , 0 , 800 , 600 );
 			dogeScore = 0;
             drawHitDoge(x,y);
@@ -230,12 +233,18 @@ $(function(){
         return collision;
     }
 
-	function ballAppear(velocity){
+	function ballAppear(velocity, gameStatus){
        //increment score
-       dogeScore += 1;
-       randomDogeText(dogeText);
        ballStartingPosition =  900;
-       ballInterval = drawBall(context, ballStartingPosition -= velocity);
+	   if (gameStatus == "continue"){
+		   dogeScore += 1;
+		   randomDogeText(dogeText);
+           ballInterval = drawBall(context, ballStartingPosition -= velocity);
+	   }else{
+		   displayGameOver(dogeScore);
+           ballInterval = drawBall(context, ballStartingPosition -= velocity);
+	   }
+
 	}
 
     //Game Utils
@@ -324,6 +333,11 @@ $(function(){
   function ballImage(fileNum, ballX ,ballY){
     context.drawImage(imageObj, ballX, ballY);
     imageObj.src = "/images/" + fileNum + ".png";
+  }
+
+  function displayGameOver(finalScore){
+	  var divScore = "<div id='game-over'><h1 class='title'> Wow Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='reset'></div></div>";
+	  $('.arcade').append(divScore);
   }
 
 });
