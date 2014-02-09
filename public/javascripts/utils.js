@@ -12,7 +12,7 @@ $(function(){
         numResourcesLoaded = 0,
         fps = 30,
 		ballStartingPosition = 900,
-		ballStartingVelocity = 5,
+		ballStartingVelocity = 10,
 		ballInterval,
         imageObj = new Image(),
         charX = 300,
@@ -23,7 +23,7 @@ $(function(){
         bird = "1";
 
 
-	var velocityItems =  [5, 7, 10, 14, 15, 17, 20, 25, 30];
+	var velocityItems =  [5, 10, 15, 20, 25, 30];
 
     var canvas = document.getElementById('canvasId');
     var context = canvas.getContext("2d");
@@ -144,7 +144,6 @@ $(function(){
             backX: x + 20,
             backY: y
         }
-
         return ballBox;
     }
 
@@ -195,17 +194,15 @@ $(function(){
 
     function redraw(){
         var x = charX,
-			//y = canvas.height / 2;
 			y = 418;
 
         context.clearRect ( 0 , 0 , 800 , 600 );
         drawDoge(x,y)
 
-
         //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
-			console.log('allen');
             context.clearRect ( 0 , 0 , 800 , 600 );
+			dogeScore = 0;
             drawHitDoge(x,y);
         } else {
             drawDoge(x,y);
@@ -219,7 +216,7 @@ $(function(){
         var collision = false;
 
         var currentDogeCoords = getDogeCoords(dogeX,dogeY),
-            currentBallCoords = getBallCoords(ballPosition, canvas.height/2);
+            currentBallCoords = getBallCoords(ballPosition, 450);
 
         var rangeOfDogeX = _.range(currentDogeCoords.backX, currentDogeCoords.frontX, 1),
             rangeOfDogeY = _.range(currentDogeCoords.frontY, currentDogeCoords.frontY + 20);
