@@ -92,7 +92,7 @@ a {
   position: fixed;
   left: 50%;
   margin-left: -440px;
-  border: 40px solid rgba(200, 20, 20, 1); /* Change this color, ask sam */
+  border: 40px solid #CF5641;
   background-position: -130px 970px;
 }
 
@@ -186,4 +186,10 @@ a {
   margin-top: 5px;
 }
 
+#instruction {
+  color: white;
+  font-size: 2em;
+  position: absolute;
+  left: 38%;
+}
 

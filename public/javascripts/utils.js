@@ -193,9 +193,22 @@ $("#startGame").click(function(){
         if(numResourcesLoaded === totalResources) {
             setInterval(redraw, 1000 / fps);
             setTimeout(function(){
-                status = "continue";
+              readyGo('go');
+              status = "continue";
             }, 2000);
         }
+    }
+
+    function readyGo(cmd){
+      if(cmd === 'go') {
+        $('#instruction').text('Say WOW!');
+        $('#instruction').css('color', '#53ff6b');
+        $('#instruction').css('left', '42%');
+ 
+        setTimeout(function() {
+          $('#instruction').hide();
+        }, 1000);
+      }
     }
 
     function redraw(){

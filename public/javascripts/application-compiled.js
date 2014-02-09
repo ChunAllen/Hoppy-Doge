@@ -23,7 +23,7 @@ $(document).ready(function() {
 		$("#game").hide();
 
 		$background.removeClass('gradient-bg');
-		$("#landing").fadeIn(1000);
+      $("#landing").fadeIn(1000);
 	  });
 
 });
