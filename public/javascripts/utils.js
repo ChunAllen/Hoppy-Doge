@@ -23,7 +23,7 @@ $("#startGame").click(function(){
         ball =  "0",
         bird = "1",
         status = "GG",
-        userName= "YourName";
+        userName= "";
 
 
 	//var velocityItems =  [5, 10, 15, 20, 25, 30];
@@ -368,7 +368,7 @@ $("#startGame").click(function(){
 	  var divScore = "<h1 class='title'> Such Score!</h1><h1 class='title jumbo'>" +
           finalScore + "</h1><div class='vspacer-10'></div>"+
           "<center>" +
-          "<input type='text' id='leader' value='"+ userName +"' maxlength='10'/>" +
+          "<input type='text' id='leader' value='"+ userName +"' maxlength='10' placeholder='YOURNAME'/>" +
           "<div class='reset-game' id='resetGame'></div>" +
           "</center>";
 
