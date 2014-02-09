@@ -1,6 +1,7 @@
 $(function(){
 $("#startGame").click(function(){
 
+    $('#team-members').hide();
     $("#scoreboard").hide();
 
     //Parameters
@@ -380,6 +381,7 @@ $("#startGame").click(function(){
 	  $('#game-over').html(divScore);
       $('#game-over').show();
       $("#resetGame").click(function(){
+          $('#scoreboard').hide();
           revertReadyGo();
           saveLeader(finalScore);
           $('#instruction').show();
