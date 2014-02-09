@@ -185,3 +185,22 @@ a {
 .twitter-share-button {
   margin-top: 5px;
 }
+
+.call-to-action {
+  background: rgba(30, 173, 20, .4);
+  width: 370px;
+  height: 25px;
+  margin: 0 auto;
+  padding: 1%;
+  border-radius: 5px;
+}
+
+.call-to-action p {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.call-to-action a {
+  text-decoration: none;
+}
