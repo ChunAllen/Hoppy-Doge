@@ -132,6 +132,14 @@ a {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6ac4d4', endColorstr='#51adb2',GradientType=0 ); /* IE6-8 */
 }
 
+.bg-rays {
+  background: url('/images/bgrays.png') no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+}
+
 #team {
   position: relative;
   font-family: 'Comic Sans MS', 'Comic Sans';
@@ -183,6 +191,12 @@ span.galore {
   width: 130px;
 }
 
+#flappybird {
+  background: url('/images/flappy.png') no-repeat;
+  height: 50px;
+  width: 65px;
+}
+
 a {
   color: #F3D08A;
 }
@@ -198,3 +212,10 @@ a {
   left: 38%;
 }
 
+table {
+  border: 1px solid white;
+}
+
+table td {
+  border: 1px solid white;
+}

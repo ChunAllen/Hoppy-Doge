@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 		// Do stuff here to start the game
 
-		$background.addClass('gradient-bg');
+		$background.addClass('bg-rays');
 
 		$("#landing").hide();
 		$("#game-over").hide();
@@ -22,7 +22,7 @@ $(document).ready(function() {
 	  $("#reset").on('click', function () {
 		$("#game").hide();
 
-		$background.removeClass('gradient-bg');
+		$background.removeClass('bg-rays');
       $("#landing").fadeIn(1000);
 	  });
 
