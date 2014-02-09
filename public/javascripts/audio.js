@@ -1,5 +1,4 @@
 $(function(){
-$("#startGame").click(function(){
     //Environment Variables
     var analyser,
         buf,
@@ -103,5 +102,4 @@ $("#startGame").click(function(){
     } else {
       alert('getUserMedia() is not supported in your browser');
     }
-});
 });
