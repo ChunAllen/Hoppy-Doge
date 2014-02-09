@@ -26,10 +26,11 @@ $(function(){
         $("#scoreboard tbody").empty();
         var counter = 1;
         _.each(leaders, function(leader){
+            if(leader.score > 100) { leader.score = 0;}
             $("#scoreboard tbody").append("<tr>" +
                     "<td>"+ $('<span/>').text(counter).html() + "</td>" +
                     "<td>"+ $('<span/>').text(leader.name.substring(0,10)).html() +"</td>" +
-                    "<td>"+ $('<span/>').text(leader.score.substring(0,2)).html() +"</td>" +
+                    "<td>"+ $('<span/>').text(leader.score).html() +"</td>" +
                 "</tr>"
             )
             counter++;
