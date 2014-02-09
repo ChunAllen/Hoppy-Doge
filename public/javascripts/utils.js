@@ -1,4 +1,5 @@
 $(function(){
+$("#startGame").click(function(){
 
     //Parameters
     var images = {},
@@ -241,6 +242,7 @@ $(function(){
 		   randomDogeText(dogeText);
            ballInterval = drawBall(context, ballStartingPosition -= velocity);
 	   }else{
+           console.log("GG");
 		   displayGameOver(dogeScore);
            ballInterval = drawBall(context, ballStartingPosition -= velocity);
 	   }
@@ -340,5 +342,6 @@ $(function(){
 	  $('.arcade').append(divScore);
   }
 
+});
 });
 
