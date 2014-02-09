@@ -232,7 +232,7 @@ input#leader {
   text-transform: uppercase;
 }
 
-input#leader:focus, 
+input#leader:focus,
 input#leader:active,
 input#leader:hover {
   outline: 0;
@@ -297,4 +297,20 @@ center.hallofwow {
   position: absolute;
   left: 5%;
   top: 50%;
+}
+
+::-webkit-input-placeholder {
+   color: white;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: white;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: white;
+}
+
+:-ms-input-placeholder {
+   color: white;
 }
