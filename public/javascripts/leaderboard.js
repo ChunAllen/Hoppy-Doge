@@ -6,7 +6,6 @@ $(function(){
     Leaderboard.pushName = function(name, score) {
         newRef = rootRef.push();
         if (name =="") { name = "WowUser" }
-        if (score > 100) { leader.score = 0;}
         newRef.set({name: name, score: score});
         if (score == 0) {score = 1};
         newRef.setPriority(1/score);
