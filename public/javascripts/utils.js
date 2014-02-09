@@ -212,6 +212,13 @@ $("#startGame").click(function(){
       }
     }
 
+    function revertReadyGo(){
+      $('#instruction').text('Ready your mic..');
+      $('#instruction').css('color', 'white');
+      $('#instruction').css('left', '38%');
+    }
+
+
     function redraw(){
         var x = charX,
 			y = 418;
@@ -363,6 +370,9 @@ $("#startGame").click(function(){
 	  $('#game-over').html(divScore);
       $('#game-over').show();
       $("#resetGame").click(function(){
+          revertReadyGo();
+          $('#instruction').show();
+
           $('#game-over').hide();
 
           setTimeout(function(){
