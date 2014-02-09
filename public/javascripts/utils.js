@@ -23,7 +23,7 @@ $(function(){
         bird = "1";
 
 
-	var velocityItems =  [10, 15, 20, 25, 30];
+	var velocityItems =  [5, 7, 10, 14, 15, 17, 20, 25, 30];
 
     var canvas = document.getElementById('canvasId');
     var context = canvas.getContext("2d");
@@ -150,6 +150,7 @@ $(function(){
 
     function drawBall(context, xAxis) {
 		if (xAxis > 0){
+            //y = canvas.height / 2;
             y = 450 ;
             drawEllipse(xAxis + 22, y + 45, 70, 6);
             ballImage(0, xAxis, y);
@@ -194,7 +195,8 @@ $(function(){
 
     function redraw(){
         var x = charX,
-            y = 418;
+			//y = canvas.height / 2;
+			y = 418;
 
         context.clearRect ( 0 , 0 , 800 , 600 );
         drawDoge(x,y)
@@ -202,6 +204,7 @@ $(function(){
 
         //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
+			console.log('allen');
             context.clearRect ( 0 , 0 , 800 , 600 );
             drawHitDoge(x,y);
         } else {
@@ -233,7 +236,7 @@ $(function(){
 	function ballAppear(velocity){
        //increment score
        dogeScore += 1;
-       setInterval(randomDogeText(dogeText), 1000/ 10);
+       randomDogeText(dogeText);
        ballStartingPosition =  900;
        ballInterval = drawBall(context, ballStartingPosition -= velocity);
 	}
