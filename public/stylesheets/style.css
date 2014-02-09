@@ -49,7 +49,7 @@ a {
   width: 174px;
   border-radius: 100%;
   margin: 0 auto;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 
 .title {
@@ -176,4 +176,12 @@ span.galore {
   margin-top: 20px;
   height: 50px;
   width: 130px;
+}
+
+a {
+  color: #F3D08A;
+}
+
+.twitter-share-button {
+  margin-top: 5px;
 }
