@@ -237,3 +237,35 @@ input#leader:active,
 input#leader:hover {
   outline: 0;
 }
+
+.call-to-action {
+  background: rgba(30, 173, 20, .4);
+  width: 370px;
+  height: 25px;
+  margin: 0 auto;
+  padding: 1%;
+  border-radius: 5px;
+}
+
+.call-to-action p {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.buttons > div {
+  display: inline-block;
+}
+
+.leaderboard-btn {
+  background: url('/images/leaderboard.png') no-repeat;
+  width: 220px;
+  height: 75px;
+  margin: 0 auto;
+  background-position: 0px 0px;
+}
+
+.leaderboard-btn:hover {
+  background-position: 0px -78px;
+  cursor: pointer;
+}

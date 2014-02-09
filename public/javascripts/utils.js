@@ -369,7 +369,10 @@ $("#startGame").click(function(){
           finalScore + "</h1><div class='vspacer-10'></div>"+
           "<center>" +
           "<input type='text' id='leader' value='"+ userName +"' maxlength='10' placeholder='YOURNAME'/>" +
+          "<div class='buttons'>" +
           "<div class='reset-game' id='resetGame'></div>" +
+          "<div class='leaderboard-btn' id='scoreboard-show'></div>" +
+          "</div>" +
           "</center>";
 
 	  $('#game-over').html(divScore);
