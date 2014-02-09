@@ -1,4 +1,5 @@
 $(function(){
+
     //Parameters
     var images = {},
         imageArray = ["1blink", "1eyes", "2frontFoot-jump", "2frontFoot", "3frontFoot-jump",
@@ -15,9 +16,8 @@ $(function(){
 		ballInterval,
         imageObj = new Image(),
         charX = 300,
-        charY = 300,
+        charY = 270,
 		ballX,
-        ballY = 330,
         dogeScore = 0
         ball =  "0",
         bird = "1";
@@ -202,6 +202,7 @@ $(function(){
 
         //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
+            context.clearRect ( 0 , 0 , 800 , 600 );
             drawHitDoge(x,y);
         } else {
             drawDoge(x,y);
@@ -299,7 +300,8 @@ $(function(){
     window.jump = function() {
         if (!jumping) {
             jumping = true;
-            setTimeout(land, 500);
+            window.clearInterval(window.currentTimeout)
+            window.currentTimeout = setTimeout(land, 600);
         }
     }
 
@@ -307,12 +309,22 @@ $(function(){
         jumping = false;
     }
 
-    // ball Image
-    function ballImage(fileNum, ballX ,ballY){
-      context.drawImage(imageObj, ballX, ballY);
-      imageObj.src = "/images/" + fileNum + ".png";
-    }
+  function createSpacers() {
+     var spacers = document.querySelectorAll("[class^='vspacer']");
 
+    for (var x = 0; x < spacers.length; x++ ){
+      var spacer_height = spacers[x].className.split('-')[1];
+      spacers[x].style.height = spacer_height + "px";
+    }
+  }
+
+  createSpacers();
+
+  // ball Image
+  function ballImage(fileNum, ballX ,ballY){
+    context.drawImage(imageObj, ballX, ballY);
+    imageObj.src = "/images/" + fileNum + ".png";
+  }
 
 });
 

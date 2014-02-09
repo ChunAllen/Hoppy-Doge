@@ -1,11 +1,187 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Comic Sans MS', 'Comic Sans' !important; /* Because comic sans */
+  overflow: hidden;
 }
 
 a {
   color: #00B7FF;
 }
 
-canvas {
+#canvasId {
+  background: rgba(255, 0, 0, 0);
+}
+
+.fixed-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #6AC4D4 url('/images/bg.png') repeat-x center bottom;  
+}
+
+.background {
+  background: #F3D08A url('/images/bg.png');
+}
+
+.beige {
+  color: #F3D08A;
+}
+
+.darkblue {
+  color: #51ADB2;
+}
+
+.lightblue {
+  color: #6AC4D4;
+}
+
+#landing {
+}
+
+.divider {
+  position: relative;
+  height: 20px;
+  background: red;
+}
+
+.logo {
+  background: #6AC4D4 url('/images/logo.png') no-repeat;
+  height: 174px;
+  width: 174px;
+  border-radius: 100%;
+  margin: 0 auto;
+  margin-top: 2%;
+}
+
+.title {
+  font-family: 'Comic Sans MS', 'Comic Sans';
+  font-size: 3.2em;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.start-button {
+  background: url('/images/start.png') no-repeat;
+  width: 220px;
+  height: 75px;
+  margin: 0 auto;
+}
+
+.sub-title {
+  text-align: center;
+  color: white;
+}
+
+.start-button.red {
+  background-position: 0px 0px;
+}
+
+.start-button.red:hover {
+  cursor: pointer;
+  background-position: 0px -78px;
+}
+
+.start-button.green {
+  background-position: 0px -78px;
+}
+
+.arcade {
+  height: 1000px;
+  background: #D36F62 url('/images/arcade-bg.png');
+  min-width: 800px;
+  position: fixed;
+  left: 50%;
+  margin-left: -440px;
+  border: 40px solid rgba(200, 20, 20, 1); /* Change this color, ask sam */
+  background-position: -130px 970px;
+}
+
+.centered-container {
+  width: 800px;
+  height: 600px;
+}
+
+.box-container-header {
+  width: 800px;
+  height: 50px;
+  /* background: blue; */
+  position: fixed;
+  left: 50%;
+  margin-left: -350px;
+}
+
+.box-container {
+  height: 600px;
+  width: 800px;
+  background: url('/images/bg.png');
+  position: fixed;
+  left: 50%;
+  margin-left: -400px;
+}
+
+.gradient-bg {
+  background: rgb(106,196,212); /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzZhYzRkNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM1MWFkYjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top, rgba(106,196,212,1) 0%, rgba(81,173,178,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(106,196,212,1)), color-stop(100%,rgba(81,173,178,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(106,196,212,1) 0%,rgba(81,173,178,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(106,196,212,1) 0%,rgba(81,173,178,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(106,196,212,1) 0%,rgba(81,173,178,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom, rgba(106,196,212,1) 0%,rgba(81,173,178,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6ac4d4', endColorstr='#51adb2',GradientType=0 ); /* IE6-8 */
+}
+
+#team {
+  position: relative;
+  font-family: 'Comic Sans MS', 'Comic Sans';
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+span.galore {
+  color: #F3D08A;
+}
+
+#game-over {
+  width: 500px;
+  height: 300px;
+  background: tan;
+  position: absolute;
+  top: 15%;
+  left: 20%;
+}
+
+.title.jumbo {
+  font-size: 4em;
+}
+
+.reset-game {
+  background: url('/images/try.png') no-repeat;
+  width: 220px;
+  height: 75px;
+  margin: 0 auto;
+  background-position: 0px 0px;
+}
+
+.reset-game:hover {
+  background-position: 0px -78px;
+  cursor: pointer;
+}
+
+#nyandoge {
+  background: url('/images/tacodoge.gif') no-repeat;  
+  margin-top: 20px;
+  height: 50px;
+  width: 130px;
+}
+
+a {
+  color: #F3D08A;
+}
+
+.twitter-share-button {
+  margin-top: 5px;
 }

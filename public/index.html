@@ -5,6 +5,8 @@
     <meta content="width=device-width" name="viewport">
     <meta name="description" content="Hoppy doge is a voice controlled HTML5 browser game">
     <meta name="keywords" content="hoppy doge, game, html5 browser game, flappy bird, doge, static showdown">
+    <!-- Adds favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
 
     <!-- Site css -->
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.14.1/build/cssreset/cssreset-min.css">
@@ -23,11 +25,54 @@
     <script src="javascripts/audio.js"></script>
     <!--<script src="javascripts/canvas.js"></script>-->
 
-    <!-- For final release: <script src="javascripts/application-compiled.js"></script> -->
+    <!-- Compiled site scripts -->
+    <script src="javascripts/application-compiled.js"></script>
 
   </head>
   <body>
-    <h1> Super Cool Wow Game </h1>
-    <canvas id="canvasId" width="800" height="600">
+    <!-- Turn this to a template -->
+
+    <div class="fixed-container" id="site-background">
+      <div id="landing">
+
+        <!-- Because marquee is so kewl that only tacodoge can use it very well -->
+        <marquee direction="right" scrollamount="5">
+          <div id="nyandoge"></div>
+        </marquee>
+
+        <div class="logo"></div>
+        <div class="vspacer-10"></div>
+        <h1 class="title"> HOPPY DOGE </h1>
+        <p class="sub-title"> A such amaze voice controlled browser game that is not so 2010.
+          <!-- Put this inside the game <br /> Avoid the balls by saying "wow" and make doge happy. -->
+          <br /><a href='http://twitter.com/hoppydoge'>@hoppydoge</a> is crafted with such love for <a href="http://goo.gl/E39jxs">#staticshowdown</a>
+          <br /> Please make doge happy by a simple wow tweet. Thx much.
+          <br /><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://ss14-team-157.divshot.io" data-text="Check out Hoppy Doge by Nachos Galore" data-via="staticshowdown">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </p>
+        <div class="vspacer-70"></div>
+        <div class="start-button red" id="startGame"></div>
+      </div>
+
+      <div id="game">
+        <div class="arcade">
+          <div class="box-container">
+            <marquee direction="right" scrollamount="5">
+              <div id="nyandoge"></div>
+            </marquee>
+            <canvas id="canvasId" width="800" height="600"></canvas>
+          </div>
+
+          <div id="game-over">
+            <h1 class="title"> Wow Score!</h1>
+            <h1 class="title jumbo"> 20 </h1>
+            <div class="vspacer-10"></div>
+            <div class="reset-game" id="reset"></div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
   </body>
 </html>
