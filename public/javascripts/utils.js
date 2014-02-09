@@ -13,7 +13,7 @@ $("#startGame").click(function(){
         numResourcesLoaded = 0,
         fps = 30,
 		ballStartingPosition = 900,
-		ballStartingVelocity = 10,
+		ballStartingVelocity = 15,
 		ballInterval,
         imageObj = new Image(),
         charX = 300,
@@ -25,7 +25,8 @@ $("#startGame").click(function(){
         status = "GG";
 
 
-	var velocityItems =  [5, 10, 15, 20, 25, 30];
+	//var velocityItems =  [5, 10, 15, 20, 25, 30];
+	var velocityItems =  [15, 18, 21, 24, 27, 30, 33, 36];
 
     var canvas = document.getElementById('canvasId');
     var context = canvas.getContext("2d");
@@ -329,7 +330,7 @@ $("#startGame").click(function(){
     window.jump = function() {
         if (!jumping) {
             jumping = true;
-            window.clearInterval(window.currentTimeout)
+            //window.clearInterval(window.currentTimeout)
             window.currentTimeout = setTimeout(land, 600);
         }
     }
@@ -356,8 +357,18 @@ $("#startGame").click(function(){
   }
 
   function displayGameOver(finalScore){
-	  var divScore = "<div id='game-over'><h1 class='title'> Wow Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='reset'></div></div>";
-	  $('.arcade').append(divScore);
+	  //var divScore = "<div id='game-over'><h1 class='title'> Wow Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='resetGame'></div></div>";
+	  var divScore = "<h1 class='title'> Such Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='resetGame'></div>";
+	  //$('.arcade').append(divScore);
+	  $('#game-over').html(divScore);
+      $('#game-over').show();
+      $("#resetGame").click(function(){
+          $('#game-over').hide();
+
+          setTimeout(function(){
+              status = "continue";
+          },2000);
+      });
   }
 
 });
