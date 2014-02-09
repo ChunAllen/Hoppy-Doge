@@ -345,7 +345,7 @@ $("#startGame").click(function(){
 
   function displayGameOver(finalScore){
 	  //var divScore = "<div id='game-over'><h1 class='title'> Wow Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='resetGame'></div></div>";
-	  var divScore = "<h1 class='title'> Wow Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='resetGame'></div>";
+	  var divScore = "<h1 class='title'> Such Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='resetGame'></div>";
 	  //$('.arcade').append(divScore);
 	  $('#game-over').html(divScore);
       $('#game-over').show();
