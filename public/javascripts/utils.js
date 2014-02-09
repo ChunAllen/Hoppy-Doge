@@ -7,11 +7,12 @@ $(function(){
                       "8backFoot-jump", "8backFoot", "9tail", "hit", "hitjump"];
 
     var dogeText = ["Much Wow!", "Go Doggy Jump!", "So Skilled!", "Nice Voice!", "Amaze Jump!"]
+
     var totalResources = 15,
         numResourcesLoaded = 0,
         fps = 30,
 		ballStartingPosition = 900,
-		ballStartingVelocity = 5,
+		ballStartingVelocity = 10,
 		ballInterval,
         imageObj = new Image(),
         charX = 300,
@@ -22,7 +23,7 @@ $(function(){
         bird = "1";
 
 
-	var velocityItems =  [10, 15, 20, 25, 30];
+	var velocityItems =  [5, 10, 15, 20, 25, 30];
 
     var canvas = document.getElementById('canvasId');
     var context = canvas.getContext("2d");
@@ -143,13 +144,14 @@ $(function(){
             backX: x + 20,
             backY: y
         }
-
         return ballBox;
     }
 
     function drawBall(context, xAxis) {
+
 		if (xAxis > 0){
-            y = canvas.height / 2;
+            //y = canvas.height / 2;
+            y = 450 ;
             drawEllipse(xAxis + 22, y + 45, 70, 6);
             ballImage(0, xAxis, y);
 		}else{
@@ -158,21 +160,20 @@ $(function(){
             // set random velocity
             ballStartingVelocity = velocityItems[Math.floor(Math.random() * velocityItems.length)];
             // ball re-entry
-            ballAppear(ballStartingVelocity);
+            ballAppear(ballStartingVelocity, "continue");
 		}
     }
 
 
     function displayScore(score){
-      context.font = 'italic 40pt Calibri';
-      context.fillText(score, 150, 100);
+      context.font = '40pt Calibri';
+      context.fillText(score, canvas.width / 2, 100);
     }
 
     function randomDogeText(text){
-
       var randomText = Math.floor(Math.random()* text.length);
-      context.font = 'italic 40pt Calibri';
-      context.fillText(text[randomText], 300, 100);
+      context.font = 'italic 30pt Calibri';
+      context.fillText(text[randomText], ( canvas.width / 2 ) + 100, 300);
     }
 
 
@@ -186,6 +187,7 @@ $(function(){
 
     function resourceLoaded(){
         numResourcesLoaded += 1;
+
         if(numResourcesLoaded === totalResources) {
             setInterval(redraw, 1000 / fps);
         }
@@ -193,15 +195,17 @@ $(function(){
 
     function redraw(){
         var x = charX,
-            y = charY;
+			y = 418;
 
         context.clearRect ( 0 , 0 , 800 , 600 );
         drawDoge(x,y)
 
-
         //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
+			// if ball was touched doge
+			ballAppear(0, "GG");
             context.clearRect ( 0 , 0 , 800 , 600 );
+			dogeScore = 0;
             drawHitDoge(x,y);
         } else {
             drawDoge(x,y);
@@ -215,7 +219,7 @@ $(function(){
         var collision = false;
 
         var currentDogeCoords = getDogeCoords(dogeX,dogeY),
-            currentBallCoords = getBallCoords(ballPosition, canvas.height/2);
+            currentBallCoords = getBallCoords(ballPosition, 450);
 
         var rangeOfDogeX = _.range(currentDogeCoords.backX, currentDogeCoords.frontX, 1),
             rangeOfDogeY = _.range(currentDogeCoords.frontY, currentDogeCoords.frontY + 20);
@@ -229,12 +233,18 @@ $(function(){
         return collision;
     }
 
-	function ballAppear(velocity){
+	function ballAppear(velocity, gameStatus){
        //increment score
-       dogeScore += 1;
-       setInterval(randomDogeText(dogeText), 1000/ 10);
        ballStartingPosition =  900;
-       ballInterval = drawBall(context, ballStartingPosition -= velocity);
+	   if (gameStatus == "continue"){
+		   dogeScore += 1;
+		   randomDogeText(dogeText);
+           ballInterval = drawBall(context, ballStartingPosition -= velocity);
+	   }else{
+		   displayGameOver(dogeScore);
+           ballInterval = drawBall(context, ballStartingPosition -= velocity);
+	   }
+
 	}
 
     //Game Utils
@@ -323,6 +333,11 @@ $(function(){
   function ballImage(fileNum, ballX ,ballY){
     context.drawImage(imageObj, ballX, ballY);
     imageObj.src = "/images/" + fileNum + ".png";
+  }
+
+  function displayGameOver(finalScore){
+	  var divScore = "<div id='game-over'><h1 class='title'> Wow Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='reset'></div></div>";
+	  $('.arcade').append(divScore);
   }
 
 });
