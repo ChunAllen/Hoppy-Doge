@@ -1,4 +1,8 @@
 $(function(){
+$("#startGame").click(function(){
+
+    $('#team-members').hide();
+    $("#scoreboard").hide();
 
     //Parameters
     var images = {},
@@ -7,11 +11,12 @@ $(function(){
                       "8backFoot-jump", "8backFoot", "9tail", "hit", "hitjump"];
 
     var dogeText = ["Much Wow!", "Go Doggy Jump!", "So Skilled!", "Nice Voice!", "Amaze Jump!"]
+
     var totalResources = 15,
         numResourcesLoaded = 0,
         fps = 30,
 		ballStartingPosition = 900,
-		ballStartingVelocity = 5,
+		ballStartingVelocity = 15,
 		ballInterval,
         imageObj = new Image(),
         charX = 300,
@@ -19,10 +24,13 @@ $(function(){
 		ballX,
         dogeScore = 0
         ball =  "0",
-        bird = "1";
+        bird = "1",
+        status = "GG",
+        userName= "";
 
 
-	var velocityItems =  [10, 15, 20, 25, 30];
+	//var velocityItems =  [5, 10, 15, 20, 25, 30];
+	var velocityItems =  [15, 18, 21, 24, 27, 30, 33, 36];
 
     var canvas = document.getElementById('canvasId');
     var context = canvas.getContext("2d");
@@ -143,13 +151,14 @@ $(function(){
             backX: x + 20,
             backY: y
         }
-
         return ballBox;
     }
 
     function drawBall(context, xAxis) {
+
 		if (xAxis > 0){
-            y = canvas.height / 2;
+            //y = canvas.height / 2;
+            y = 450 ;
             drawEllipse(xAxis + 22, y + 45, 70, 6);
             ballImage(0, xAxis, y);
 		}else{
@@ -158,21 +167,22 @@ $(function(){
             // set random velocity
             ballStartingVelocity = velocityItems[Math.floor(Math.random() * velocityItems.length)];
             // ball re-entry
-            ballAppear(ballStartingVelocity);
+            ballAppear(ballStartingVelocity, "continue");
 		}
     }
 
 
     function displayScore(score){
-      context.font = 'italic 40pt Calibri';
-      context.fillText(score, 150, 100);
+      context.font = '40pt Comic Sans MS, Comic Sans';
+      context.fillStyle = 'white';
+      context.fillText(score, canvas.width / 2, 100);
     }
 
     function randomDogeText(text){
-
       var randomText = Math.floor(Math.random()* text.length);
-      context.font = 'italic 40pt Calibri';
-      context.fillText(text[randomText], 300, 100);
+      context.font = 'italic 30pt Comic Sans MS, Comic Sans';
+      context.fillStyle = 'white';
+      context.fillText(text[randomText], ( canvas.width / 2 ) + 100, 300);
     }
 
 
@@ -186,36 +196,64 @@ $(function(){
 
     function resourceLoaded(){
         numResourcesLoaded += 1;
+
         if(numResourcesLoaded === totalResources) {
             setInterval(redraw, 1000 / fps);
+            setTimeout(function(){
+              readyGo('go');
+              status = "continue";
+            }, 2000);
         }
     }
 
+    function readyGo(cmd){
+      if(cmd === 'go') {
+        $('#instruction').text('Say WOW!');
+        $('#instruction').css('color', '#53ff6b');
+        $('#instruction').css('left', '42%');
+
+        setTimeout(function() {
+          $('#instruction').hide();
+        }, 1000);
+      }
+    }
+
+    function revertReadyGo(){
+      $('#instruction').text('Ready your mic..');
+      $('#instruction').css('color', 'white');
+      $('#instruction').css('left', '38%');
+    }
+
+
     function redraw(){
         var x = charX,
-            y = charY;
+			y = 418;
 
         context.clearRect ( 0 , 0 , 800 , 600 );
         drawDoge(x,y)
 
-
-        //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
+			// if ball was touched doge
+			ballAppear(0, "GG");
             context.clearRect ( 0 , 0 , 800 , 600 );
+			dogeScore = 0;
             drawHitDoge(x,y);
+            status = "GG"
         } else {
             drawDoge(x,y);
             displayScore(dogeScore);
         }
 
-        ballInterval = drawBall(context, ballStartingPosition -= ballStartingVelocity);
+        if (status == "continue") {
+            ballInterval = drawBall(context, ballStartingPosition -= ballStartingVelocity);
+        }
     }
 
     function collide(dogeX, dogeY, ballPosition){
         var collision = false;
 
         var currentDogeCoords = getDogeCoords(dogeX,dogeY),
-            currentBallCoords = getBallCoords(ballPosition, canvas.height/2);
+            currentBallCoords = getBallCoords(ballPosition, 450);
 
         var rangeOfDogeX = _.range(currentDogeCoords.backX, currentDogeCoords.frontX, 1),
             rangeOfDogeY = _.range(currentDogeCoords.frontY, currentDogeCoords.frontY + 20);
@@ -229,12 +267,18 @@ $(function(){
         return collision;
     }
 
-	function ballAppear(velocity){
+	function ballAppear(velocity, gameStatus){
        //increment score
-       dogeScore += 1;
-       setInterval(randomDogeText(dogeText), 1000/ 10);
        ballStartingPosition =  900;
-       ballInterval = drawBall(context, ballStartingPosition -= velocity);
+	   if (gameStatus == "continue"){
+		   dogeScore += 1;
+		   randomDogeText(dogeText);
+           ballInterval = drawBall(context, ballStartingPosition -= velocity);
+	   }else{
+		   displayGameOver(dogeScore);
+           ballInterval = drawBall(context, ballStartingPosition -= velocity);
+	   }
+
 	}
 
     //Game Utils
@@ -299,7 +343,7 @@ $(function(){
     window.jump = function() {
         if (!jumping) {
             jumping = true;
-            window.clearInterval(window.currentTimeout)
+            window.clearInterval(window.currentTimeout);
             window.currentTimeout = setTimeout(land, 600);
         }
     }
@@ -308,22 +352,55 @@ $(function(){
         jumping = false;
     }
 
-  function createSpacers() {
-     var spacers = document.querySelectorAll("[class^='vspacer']");
-
-    for (var x = 0; x < spacers.length; x++ ){
-      var spacer_height = spacers[x].className.split('-')[1];
-      spacers[x].style.height = spacer_height + "px";
-    }
-  }
-
-  createSpacers();
-
   // ball Image
   function ballImage(fileNum, ballX ,ballY){
     context.drawImage(imageObj, ballX, ballY);
     imageObj.src = "/images/" + fileNum + ".png";
   }
 
+  function saveLeader(finalScore){
+    var name = $("#leader").val();
+    var score = finalScore;
+    userName = name;
+
+    Leaderboard.pushName(name, score);
+
+  }
+
+  function displayGameOver(finalScore){
+	  var divScore = "<div id='toBeHidden'><h1 class='title'> Such Score!</h1><h1 class='title jumbo'>" +
+          finalScore + "</h1><div class='vspacer-10'></div></div>"+
+          "<center class='hallofwow'>" +
+          "<input type='text' id='leader' value='"+ userName +"' maxlength='10' placeholder='YOURNAME'/>" +
+          "<div class='buttons'>" +
+          "<div class='reset-game' id='resetGame'></div>" +
+          "<div class='leaderboard-btn' id='scoreboard-show'></div>" +
+          "</div>" +
+          "</center>";
+
+	  $('#game-over').html(divScore);
+      $('#game-over').show();
+      $("#resetGame").click(function(){
+          $('#scoreboard').hide();
+          revertReadyGo();
+          saveLeader(finalScore);
+          $('#instruction').show();
+
+          $('#game-over').hide();
+
+          setTimeout(function(){
+            readyGo('go');
+            status = "continue";
+          }, 2000);
+      });
+  }
+
+  $("#scoreboard-show").live('click', function(){
+    $('#toBeHidden').hide();
+    $('#scoreboard').fadeIn(1000);
+  });
+
+
+});
 });
 

@@ -8,19 +8,11 @@ HoppyDoge is a voice controlled HTML5 browser game! Such wow! Very much amaze.
 
 ## Dependencies
 
++ Firebase
 + Underscore
-+ Backbone.js
 + Jquery
 + Web Audio API
-
 + A Working Microphone
-
-## Getting Started
-
-``` bash
-$ npm install
-$ bower install
-```
 
 ## Team
 
@@ -28,6 +20,11 @@ $ bower install
 + Ace Dimasuhid ([@adimasuhid](http://github.com/adimasuhid))
 + Allen Chun ([@ChunAllen](http://github.com/chunallen))
 + Samantha Cruz ([@samrosecruz](http://github.com/samrosecruz))
+
+## Gameplay
+![Happy Doge](https://www.filepicker.io/api/file/sICZuDmHTHOfLL4oOer1)
+![Happy Doge in game](https://www.filepicker.io/api/file/Q5NFv21eRyKGjBshXGTo)
+![Happy Doge much over](https://www.filepicker.io/api/file/3mptnGWITNOJGhgQbabC)
 
 License
 -------

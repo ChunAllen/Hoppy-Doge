@@ -12,6 +12,9 @@
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.14.1/build/cssreset/cssreset-min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
 
+    <!-- Firebase -->
+    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.3/firebase.js'></script>
+
     <!-- Jquery cdn -->
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -21,6 +24,7 @@
     <script src="javascripts/backbone-min.js"></script>
 
     <!-- Site scripts -->
+    <script src="javascripts/leaderboard.js"></script>
     <script src="javascripts/utils.js"></script>
     <script src="javascripts/audio.js"></script>
     <!--<script src="javascripts/canvas.js"></script>-->
@@ -44,20 +48,18 @@
         <div class="vspacer-10"></div>
         <h1 class="title"> HOPPY DOGE </h1>
         <p class="sub-title"> A such amaze voice controlled browser game that is not so 2010.
-          <!-- Put this inside the game <br /> Avoid the balls by saying "wow" and make doge happy. -->
-          <br /><a href='http://twitter.com/hoppydoge'>@hoppydoge</a> is crafted with such love for <a href="http://goo.gl/E39jxs">#staticshowdown</a>
           <br /> Please make doge happy by a simple wow tweet. Thx much.
+          <br /> *Works best in Chrome, microphone access dependent.
           <br /><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://ss14-team-157.divshot.io" data-text="Check out Hoppy Doge by Nachos Galore" data-via="staticshowdown">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
           </p>
         <div class="vspacer-50"></div>
-        <!-- <div class="vspacer-70"></div> -->
-        <!-- <div class="start-button red" id="startGame"></div> -->
-        <div class="call-to-action">
-          <a href='http://twitter.com/hoppydoge'>
-            <p> We will be launching soon! </p>
-          </a>
-        </div>
+        <div class="start-button red" id="startGame"></div>
+        <!-- <div class="call-to-action"> -->
+        <!--   <a href='http://twitter.com/hoppydoge'> -->
+        <!--     <p> We will be launching soon! </p> -->
+        <!--   </a> -->
+        <!-- </div> -->
       </div>
 
       <div id="game">
@@ -66,18 +68,46 @@
             <marquee direction="right" scrollamount="5">
               <div id="nyandoge"></div>
             </marquee>
+            <p id='instruction'>Ready your mic..</p>
             <canvas id="canvasId" width="800" height="600"></canvas>
+
           </div>
 
           <div id="game-over">
-            <h1 class="title"> Wow Score!</h1>
-            <h1 class="title jumbo"> 20 </h1>
-            <div class="vspacer-10"></div>
-            <div class="reset-game" id="reset"></div>
+            <!--<h1 class="title"> Wow Score!</h1>-->
+            <!--<h1 class="title jumbo"> 20 </h1>-->
+            <!--<div class="vspacer-10"></div>-->
+            <!--<div class="reset-game" id="reset"></div>-->
+          </div>
+
+          <div id="scoreboard">
+            <table>
+              <thead>
+                <h1> Hall of Wow </h1>
+              </thead>
+              <tbody>
+                <!-- Placeholders -->
+                <!--<tr>-->
+                  <!--<td> Ace </td>-->
+                  <!--<td> 24 </td>-->
+                <!--<tr>-->
+                  <!--<td> Robbie </td>-->
+                  <!--<td> 47 </td>-->
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
 
+      <div id='team-members'>
+        <p>
+          <a href='http://twitter.com/hoppydoge'>@hoppydoge</a> is crafted with such love for <a href="http://goo.gl/E39jxs">#staticshowdown</a>
+          <br/> Built in less than 48 hours by 
+          <a href='http://twitter.com/acedimasuhid'>@acedimasuhid</a> ,
+          <a href='http://twitter.com/rbmrclo'>@rbmrclo</a> ,
+          <a href='http://twitter.com/iallenchun'>@iallenchun</a> ,
+          <a href='http://twitter.com/samrosecruz'>@samrosecruz.</a>
+      </div>
 
     </div>
   </body>
