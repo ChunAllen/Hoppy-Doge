@@ -8,19 +8,11 @@ HoppyDoge is a voice controlled HTML5 browser game! Such wow! Very much amaze.
 
 ## Dependencies
 
++ Firebase
 + Underscore
-+ Backbone.js
 + Jquery
 + Web Audio API
-
 + A Working Microphone
-
-## Getting Started
-
-``` bash
-$ npm install
-$ bower install
-```
 
 ## Team
 
