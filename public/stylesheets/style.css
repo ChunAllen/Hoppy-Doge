@@ -155,7 +155,7 @@ span.galore {
 
 #game-over {
   width: 500px;
-  height: 280px;
+  height: 310px;
   background: #E84242;
   position: absolute;
   top: 15%;
@@ -168,7 +168,7 @@ span.galore {
 }
 
 .title.jumbo {
-  font-size: 2.7em;
+  font-size: 3.5em;
 }
 
 .reset-game {
@@ -213,11 +213,11 @@ a {
 }
 
 table {
-  border: 1px solid white;
+
 }
 
 table td {
-  border: 1px solid white;
+  border: none;
 }
 
 input#leader {
@@ -268,4 +268,33 @@ input#leader:hover {
 .leaderboard-btn:hover {
   background-position: 0px -78px;
   cursor: pointer;
+}
+
+#scoreboard {
+  width: 350px;
+  left: 50%;
+  margin-left: -165px;
+  position: absolute;
+  top: 50%;
+  margin-top: -320px;
+}
+
+#scoreboard table {
+  width: inherit;
+  border: none;
+  text-align: center;
+  color: white;
+}
+
+#scoreboard h1 {
+  font-size: 1.5em;
+  text-align: center;
+  color: white;
+  margin-bottom: 5px;
+}
+
+center.hallofwow {
+  position: absolute;
+  left: 5%;
+  top: 50%;
 }

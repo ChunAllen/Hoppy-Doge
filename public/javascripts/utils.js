@@ -1,6 +1,8 @@
 $(function(){
 $("#startGame").click(function(){
 
+    $("#scoreboard").hide();
+
     //Parameters
     var images = {},
         imageArray = ["1blink", "1eyes", "2frontFoot-jump", "2frontFoot", "3frontFoot-jump",
@@ -365,9 +367,9 @@ $("#startGame").click(function(){
   }
 
   function displayGameOver(finalScore){
-	  var divScore = "<h1 class='title'> Such Score!</h1><h1 class='title jumbo'>" +
-          finalScore + "</h1><div class='vspacer-10'></div>"+
-          "<center>" +
+	  var divScore = "<div id='toBeHidden'><h1 class='title'> Such Score!</h1><h1 class='title jumbo'>" +
+          finalScore + "</h1><div class='vspacer-10'></div></div>"+
+          "<center class='hallofwow'>" +
           "<input type='text' id='leader' value='"+ userName +"' maxlength='10' placeholder='YOURNAME'/>" +
           "<div class='buttons'>" +
           "<div class='reset-game' id='resetGame'></div>" +
@@ -390,6 +392,12 @@ $("#startGame").click(function(){
           }, 2000);
       });
   }
+
+  $("#scoreboard-show").live('click', function(){
+    $('#toBeHidden').hide();
+    $('#scoreboard').fadeIn(1000);
+  });
+
 
 });
 });

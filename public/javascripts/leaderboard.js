@@ -24,12 +24,15 @@ $(function(){
 
     Leaderboard.showAll(function(leaders){
         $("#scoreboard tbody").empty();
+        var counter = 1;
         _.each(leaders, function(leader){
             $("#scoreboard tbody").append("<tr>" +
+                    "<td>"+ counter + "</td>" +
                     "<td>"+ leader.name +"</td>" +
                     "<td>"+ leader.score +"</td>" +
                 "</tr>"
             )
+            counter++;
         });
     });
 });
