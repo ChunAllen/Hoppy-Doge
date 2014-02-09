@@ -330,7 +330,7 @@ $("#startGame").click(function(){
     window.jump = function() {
         if (!jumping) {
             jumping = true;
-            //window.clearInterval(window.currentTimeout)
+            window.clearInterval(window.currentTimeout)
             window.currentTimeout = setTimeout(land, 600);
         }
     }
@@ -366,8 +366,9 @@ $("#startGame").click(function(){
           $('#game-over').hide();
 
           setTimeout(function(){
-              status = "continue";
-          },2000);
+            readyGo('go');
+            status = "continue";
+          }, 2000);
       });
   }
 
