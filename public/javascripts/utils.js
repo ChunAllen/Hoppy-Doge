@@ -22,7 +22,8 @@ $("#startGame").click(function(){
         dogeScore = 0
         ball =  "0",
         bird = "1",
-        status = "GG";
+        status = "GG",
+        userName= "YourName";
 
 
 	//var velocityItems =  [5, 10, 15, 20, 25, 30];
@@ -207,7 +208,7 @@ $("#startGame").click(function(){
         $('#instruction').text('Say WOW!');
         $('#instruction').css('color', '#53ff6b');
         $('#instruction').css('left', '42%');
- 
+
         setTimeout(function() {
           $('#instruction').hide();
         }, 1000);
@@ -354,14 +355,26 @@ $("#startGame").click(function(){
     imageObj.src = "/images/" + fileNum + ".png";
   }
 
+  function saveLeader(finalScore){
+    var name = $("#leader").val();
+    var score = finalScore;
+    userName = name;
+
+    Leaderboard.pushName(name, score);
+
+  }
+
   function displayGameOver(finalScore){
-	  //var divScore = "<div id='game-over'><h1 class='title'> Wow Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='resetGame'></div></div>";
-	  var divScore = "<h1 class='title'> Such Score!</h1><h1 class='title jumbo'>" +  finalScore + "</h1><div class='vspacer-10'></div><div class='reset-game' id='resetGame'></div>";
-	  //$('.arcade').append(divScore);
+	  var divScore = "<h1 class='title'> Such Score!</h1><h1 class='title jumbo'>" +
+          finalScore + "</h1><div class='vspacer-10'></div>"+
+          "<input type='text' id='leader' value='"+ userName +"'/>" +
+          "<div class='reset-game' id='resetGame'></div>";
+
 	  $('#game-over').html(divScore);
       $('#game-over').show();
       $("#resetGame").click(function(){
           revertReadyGo();
+          saveLeader(finalScore);
           $('#instruction').show();
 
           $('#game-over').hide();

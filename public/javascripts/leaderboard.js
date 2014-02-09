@@ -6,6 +6,7 @@ $(function(){
     Leaderboard.pushName = function(name, score) {
         newRef = rootRef.push();
         newRef.set({name: name, score: score});
+        if (score == 0) score = 1;
         newRef.setPriority(1/score);
 
         return true;
