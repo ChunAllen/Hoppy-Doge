@@ -169,13 +169,15 @@ $("#startGame").click(function(){
 
 
     function displayScore(score){
-      context.font = '40pt Calibri';
+      context.font = '40pt Comic Sans MS, Comic Sans';
+      context.fillStyle = 'white';
       context.fillText(score, canvas.width / 2, 100);
     }
 
     function randomDogeText(text){
       var randomText = Math.floor(Math.random()* text.length);
-      context.font = 'italic 30pt Calibri';
+      context.font = 'italic 30pt Comic Sans MS, Comic Sans';
+      context.fillStyle = 'white';
       context.fillText(text[randomText], ( canvas.width / 2 ) + 100, 300);
     }
 
@@ -194,10 +196,30 @@ $("#startGame").click(function(){
         if(numResourcesLoaded === totalResources) {
             setInterval(redraw, 1000 / fps);
             setTimeout(function(){
-                status = "continue";
+              readyGo('go');
+              status = "continue";
             }, 2000);
         }
     }
+
+    function readyGo(cmd){
+      if(cmd === 'go') {
+        $('#instruction').text('Say WOW!');
+        $('#instruction').css('color', '#53ff6b');
+        $('#instruction').css('left', '42%');
+ 
+        setTimeout(function() {
+          $('#instruction').hide();
+        }, 1000);
+      }
+    }
+
+    function revertReadyGo(){
+      $('#instruction').text('Ready your mic..');
+      $('#instruction').css('color', 'white');
+      $('#instruction').css('left', '38%');
+    }
+
 
     function redraw(){
         var x = charX,
@@ -317,7 +339,7 @@ $("#startGame").click(function(){
     window.jump = function() {
         if (!jumping) {
             jumping = true;
-            window.clearInterval(window.currentTimeout)
+            window.clearInterval(window.currentTimeout);
             window.currentTimeout = setTimeout(land, 600);
         }
     }
@@ -325,17 +347,6 @@ $("#startGame").click(function(){
     function land() {
         jumping = false;
     }
-
-  function createSpacers() {
-     var spacers = document.querySelectorAll("[class^='vspacer']");
-
-    for (var x = 0; x < spacers.length; x++ ){
-      var spacer_height = spacers[x].className.split('-')[1];
-      spacers[x].style.height = spacer_height + "px";
-    }
-  }
-
-  createSpacers();
 
   // ball Image
   function ballImage(fileNum, ballX ,ballY){
@@ -350,11 +361,15 @@ $("#startGame").click(function(){
 	  $('#game-over').html(divScore);
       $('#game-over').show();
       $("#resetGame").click(function(){
+          revertReadyGo();
+          $('#instruction').show();
+
           $('#game-over').hide();
 
           setTimeout(function(){
-              status = "continue";
-          },2000);
+            readyGo('go');
+            status = "continue";
+          }, 2000);
       });
   }
 
