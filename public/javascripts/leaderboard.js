@@ -5,7 +5,7 @@ $(function(){
 
     Leaderboard.pushName = function(name, score) {
         newRef = rootRef.push();
-        if (name =="") { name = "YourName" }
+        if (name =="") { name = "WowUser" }
         newRef.set({name: name, score: score});
         if (score == 0) {score = 1};
         newRef.setPriority(1/score);
@@ -14,7 +14,7 @@ $(function(){
     }
 
     Leaderboard.showAll = function(callback) {
-        var limit = 10;
+        var limit = 5;
         var query = rootRef.startAt().limit(limit);
         query.on('value', function(childSnapshot){
             callback(childSnapshot.val());
@@ -23,7 +23,7 @@ $(function(){
     }
 
     Leaderboard.showAll(function(leaders){
-        $("#scoreboard tbody").html();
+        $("#scoreboard tbody").empty();
         _.each(leaders, function(leader){
             $("#scoreboard tbody").append("<tr>" +
                     "<td>"+ leader.name +"</td>" +
