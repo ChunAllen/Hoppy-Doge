@@ -21,7 +21,8 @@ $("#startGame").click(function(){
 		ballX,
         dogeScore = 0
         ball =  "0",
-        bird = "1";
+        bird = "1",
+        status = "GG";
 
 
 	var velocityItems =  [5, 10, 15, 20, 25, 30];
@@ -191,6 +192,9 @@ $("#startGame").click(function(){
 
         if(numResourcesLoaded === totalResources) {
             setInterval(redraw, 1000 / fps);
+            setTimeout(function(){
+                status = "continue";
+            }, 2000);
         }
     }
 
@@ -201,19 +205,21 @@ $("#startGame").click(function(){
         context.clearRect ( 0 , 0 , 800 , 600 );
         drawDoge(x,y)
 
-        //maybe move this to another function
         if(collide(x,y, ballStartingPosition)) {
 			// if ball was touched doge
 			ballAppear(0, "GG");
             context.clearRect ( 0 , 0 , 800 , 600 );
 			dogeScore = 0;
             drawHitDoge(x,y);
+            status = "GG"
         } else {
             drawDoge(x,y);
             displayScore(dogeScore);
         }
 
-        ballInterval = drawBall(context, ballStartingPosition -= ballStartingVelocity);
+        if (status == "continue") {
+            ballInterval = drawBall(context, ballStartingPosition -= ballStartingVelocity);
+        }
     }
 
     function collide(dogeX, dogeY, ballPosition){
@@ -242,7 +248,6 @@ $("#startGame").click(function(){
 		   randomDogeText(dogeText);
            ballInterval = drawBall(context, ballStartingPosition -= velocity);
 	   }else{
-           console.log("GG");
 		   displayGameOver(dogeScore);
            ballInterval = drawBall(context, ballStartingPosition -= velocity);
 	   }
